@@ -1,6 +1,8 @@
 import { MovieApi } from './movieApi';
+import trendingMarkUp from './templates/trendingMarkUp.hbs';
 
 const movieApi = new MovieApi();
+const galleryEl = document.querySelector('[data="main-gallery"]');
 
 const renderTrendingMovies = async () => {
   try {
@@ -8,8 +10,9 @@ const renderTrendingMovies = async () => {
       data: { results },
     } = await movieApi.getTrendingMovies();
 
-    console.log(movieApi.getGenreNames(results[10]['genre_ids']));
-    console.log(results);
+    const preparedData = movieApi.getPreparedData(results);
+    console.log(preparedData);
+    galleryEl.innerHTML = trendingMarkUp(preparedData);
   } catch (err) {
     console.log(err);
   }
@@ -40,5 +43,5 @@ const renderMovie = async () => {
 movieApi.storeGenres();
 
 renderTrendingMovies();
-renderSearchMovies();
-renderMovie();
+// renderSearchMovies();
+// renderMovie();
