@@ -1,3 +1,17 @@
-body {
-    background-color: tomato;
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media screen and (min-width: 480px) {
+    width: 480px;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 734px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 990px;
+  }
 }
