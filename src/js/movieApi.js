@@ -10,7 +10,7 @@ export class MovieApi {
     return axios.get(`${this.#BASE_URL}trending/movie/week`, {
       params: {
         api_key: this.#API_KEY,
-        page: 2,
+        page: 1,
       },
     });
   }
