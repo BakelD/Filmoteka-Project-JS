@@ -76,4 +76,49 @@
 
 .item__info {
   color: $underlineColor;
+  display: inline;
+}
+
+.item__info--rating {
+  color: $whiteColor;
+  background-color: $btnColor;
+  display: inline;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
+.pagination-wrapper {
+  outline: 2px solid tomato;
+  margin: 60px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 10px;
+  // height: 10px;
+}
+.btn-arrow {
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: transparent;
+  background-color: $bgFooterColor;
+  border-radius: 5px;
+  &:focus,
+  &:hover {
+    color: $underlineColor;
+    outline: 2px solid $underlineColor;
+  }
+}
+.btn-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: transparent;
+}
+.current-page {
+  color: red;
 }
