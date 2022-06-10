@@ -1,5 +1,4 @@
 .library {
-  max-width: 1600px;
   width: 100%;
   height: 230px;
   background-image: linear-gradient(
@@ -35,7 +34,7 @@
   }
 }
 
-.libtary__nav {
+.library__nav {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -47,22 +46,6 @@ a {
   cursor: pointer;
 }
 
-.library__icon {
-  stroke: #818181;
-  fill: transparent;
-  margin-right: 8px;
-
-  @include mq(desktop) {
-    margin-right: 10px;
-  }
-}
-
-.library__icon:hover,
-.library__icon:focus {
-  stroke: $btnColor;
-  fill: transparent;
-}
-
 .library__logo-text {
   display: none;
   @include mq(tablet) {
@@ -71,6 +54,34 @@ a {
     font-size: 30px;
     line-height: 1.16;
   }
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    color: $btnColor;
+  }
+}
+
+.library__link:hover .library__icon,
+.library__link:focus .library__icon {
+  stroke: currentColor;
+  color: $btnColor;
+}
+
+.library__icon {
+  stroke: #818181;
+  fill: transparent;
+  margin-right: 8px;
+  transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @include mq(desktop) {
+    margin-right: 10px;
+  }
+}
+
+.library__link:hover .library__logo-text,
+.library__link:focus .library__logo-text {
+  color: $btnColor;
 }
 
 .library__nav-list {
@@ -89,6 +100,13 @@ a {
   @include mq(tablet) {
     padding-top: 9px;
   }
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.library__nav-item:hover,
+.library__nav-item:focus {
+  color: $underlineColor;
 }
 
 .library__nav-item:last-child {
@@ -134,8 +152,25 @@ a {
   border: transparent;
   background-color: $btnColor;
   box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px 0 rgba(255, 107, 1, 0.6);
+  transition: 0.5s;
+}
+
+.activeted:hover,
+.activeted:focus {
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 40px 0 rgba(255, 107, 1, 0.6);
 }
 
 .deactivated {
   border: 1px solid $whiteColor;
+  transition: 0.5s;
+}
+
+.deactivated:hover,
+.deactivated:focus {
+  // box-shadow: 0 0 0 2px rgb(0, 0, 0), 0 0 0 4px rgba(255, 107, 1, 0.6);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 40px 0 rgba(255, 255, 255, 0.6);
 }
