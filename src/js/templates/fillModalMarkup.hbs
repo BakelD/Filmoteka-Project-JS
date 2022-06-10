@@ -1,0 +1,46 @@
+
+
+        <img
+          class="modal__poster"
+          src="{{poster_path}}"
+          alt="{{title}}"
+          width="240"
+          height="357"
+        />
+      <div class="modal__info">
+        <h3 class="modal__title">{{title}}</h3>
+        <table class="modal__table">
+          <tbody>
+            <tr>
+              <th class="modal__subtitle--table">Vote / Votes</th>
+              <th class="modal__table--text">
+                <span class="modal__table--vote modal__rating">{{vote_average}}</span>
+                <span class="table--splash">/</span>
+                <span class="modal__rating">{{vote_count}}</span>
+              </th>
+            </tr>
+            <tr>
+              <th class="modal__subtitle--table">Popularity</th>
+              <th class="modal__table--text">{{popularity}}</th>
+            </tr>
+            <tr>
+              <th class="modal__subtitle--table">Original Title</th>
+              <th class="modal__table--text">{{title}}</th>
+            </tr>
+            <tr>
+              <th class="modal__subtitle--table">Genre</th>
+              <th class="modal__table--text">{{genres}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="modal__subtitle">about</h4>
+        <p class="modal__desc">{{overview}}
+        </p>
+    <div class="modal__btns">
+          <button class="btn--add active" type="button">add to Watched</button>
+          <button class="btn--add" type="button">add to queue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
