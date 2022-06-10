@@ -1,23 +1,37 @@
 <header class="library">
   <div class="container">
-    <nav class="libtary__nav">
-      <a class="libtary__link" href="./index.html">
+    <nav class="library__nav">
+      <a class="library__link" href="./index.html" aria-label="Home page link">
         <svg class="library__icon" width="24" height="24">
           <use href="../src/images/sprite.svg#icon-film"></use></svg
         ><span class="library__logo-text">Filmoteka</span>
       </a>
       <ul class="library__nav-list">
         <li class="library__nav-item list">
-          <a href="./index.html">HOME</a>
+          <a href="./index.html" aria-label="Home page link">HOME</a>
         </li>
         <li class="library__nav-item list active">
-          <a href="./library.html">MY LIBRARY</a>
+          <a href="./library.html" aria-label="My library page link"
+            >MY LIBRARY</a
+          >
         </li>
       </ul>
     </nav>
     <div class="library__btns">
-      <button class="library__btn activeted" type="button">WATCHED</button>
-      <button class="library__btn deactivated" type="button">QUEUE</button>
+      <button
+        class="library__btn activeted"
+        type="button"
+        aria-label="Button watched"
+      >
+        WATCHED
+      </button>
+      <button
+        class="library__btn deactivated"
+        type="button"
+        aria-label="Button queue"
+      >
+        QUEUE
+      </button>
     </div>
   </div>
 </header>
