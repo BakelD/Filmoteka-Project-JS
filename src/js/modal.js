@@ -13,7 +13,7 @@ const refs = {
   galleryItemId: document.querySelector('.gallery__item'),
   backdrop: document.querySelector('.backdrop'),
 };
-const arrInLocalStrg = {
+export const arrInLocalStrg = {
   watched: [],
   queue: [],
 };
