@@ -69,15 +69,29 @@ export class MovieApi {
 
   getPreparedData(arrayOfData) {
     return arrayOfData.map(
-      ({ id, title, poster_path, genre_ids, release_date }) => {
+      ({ poster_path, genre_ids, release_date, ...rest }) => {
         return {
-          id,
-          title,
+          ...rest,
           poster_path: this.#IMG_BASE_URL + poster_path,
           release_date: release_date.slice(0, 4),
           genre_ids: this.#getGenreNames(genre_ids).slice(0, 4).join(', '),
         };
       }
     );
+  }
+
+  temproraryStoreMovies(preparedData) {
+    localStorage.setItem('temproraryStore', JSON.stringify(preparedData));
+  }
+
+  getMovieFromStorageById(id) {
+    try {
+      const movies = JSON.parse(localStorage.getItem('temproraryStore'));
+      const movie = movies.find(el => el.id === id);
+
+      console.log(movie);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

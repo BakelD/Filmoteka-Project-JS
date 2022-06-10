@@ -1,8 +1,11 @@
 import { MovieApi } from './movieApi';
-import trendingMarkUp from './templates/trendingMarkUp.hbs';
+import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
+import './findMovies.js';
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');
+
+localStorage.removeItem('temproraryStore');
 
 const renderTrendingMovies = async () => {
   try {
@@ -12,7 +15,8 @@ const renderTrendingMovies = async () => {
 
     const preparedData = movieApi.getPreparedData(results);
     console.log(preparedData);
-    galleryEl.innerHTML = trendingMarkUp(preparedData);
+    movieApi.temproraryStoreMovies(preparedData);
+    galleryEl.innerHTML = trendingAndSearchMarkUp(preparedData);
   } catch (err) {
     console.log(err);
   }
