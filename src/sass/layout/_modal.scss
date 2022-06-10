@@ -200,7 +200,8 @@
 }
 
 .modal__desc {
-  max-height: 300px;
+  padding-right: 10px;
+  max-height: 180px;
   overflow-y: scroll;
 
   @include fonts();
@@ -234,8 +235,6 @@
   background-color: $whiteColor;
   border: 1px solid $txtColor;
   border-radius: 5px;
-  box-shadow: 0 20px 40px 0 rgba(255, 255, 255, 0.6);
-
   transition: 0.5s;
 
 
@@ -253,11 +252,7 @@
 
   &:hover,
   &:focus {
-    background-color: $btnColor;
-    color: $whiteColor;
-    border: transparent;
-
-    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+    box-shadow: 0px 8px 43px rgba(0, 0, 0.6, 0.1);
     transform: translate(0, -3px);
   }
 }
@@ -265,8 +260,6 @@
 .btn--add.active {
   background-color: $btnColor;
   color: $whiteColor;
-  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-
 
 
   padding: 6px 27px;
@@ -286,10 +279,8 @@
 
   &:hover,
   &:focus {
-    background-color: $whiteColor;
-    color: $txtColor;
-    border: 1px solid $txtColor;
+
     transform: translate(0, -3px);
-    box-shadow: none;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
 }

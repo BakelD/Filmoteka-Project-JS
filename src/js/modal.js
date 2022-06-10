@@ -15,11 +15,10 @@ const refs = {
 
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', () => {
+    document.removeEventListener('keydown', closeByEsc);
+});
 refs.backdrop.addEventListener('click', onBackdropClick);
-
-function toggleModal() {
-  refs.modal.classList.toggle('is-hidden');
-}
 
 async function onOpenModal(e) {
   if (e.target.nodeName === 'UL') {
@@ -48,12 +47,18 @@ function closeByEsc(e) {
   if (e.code !== 'Escape') {
     return;
   }
-  toggleModal();
-  document.removeEventListener('keydown', closeByEsc);
+    toggleModal();
+    document.removeEventListener('keydown', closeByEsc);
+    
 }
 function onBackdropClick(e) {
     if (e.target !== e.currentTarget) {
         return;
     }
     toggleModal();
- };
+    document.removeEventListener('keydown', closeByEsc);
+};
+ 
+function toggleModal() {
+    refs.modal.classList.toggle('is-hidden');
+}
