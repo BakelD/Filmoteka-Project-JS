@@ -102,7 +102,7 @@ export class MovieApi {
       const movies = JSON.parse(localStorage.getItem('temproraryStore'));
       const movie = movies.find(el => el.id === id);
 
-      console.log(movie);
+      return movie;
     } catch (err) {
       console.log(err);
     }

@@ -1,6 +1,7 @@
 import { MovieApi } from './movieApi';
 import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
 import './findMovies.js';
+import './paginationTreading';
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');
@@ -10,9 +11,9 @@ localStorage.removeItem('temproraryStore');
 const renderTrendingMovies = async () => {
   try {
     const {
-      data: { results },
+      data: { results, total_pages },
     } = await movieApi.getTrendingMovies();
-
+    console.log(total_pages);
     console.log(results);
     const preparedData = movieApi.getPreparedData(results);
     console.log(preparedData);
@@ -22,18 +23,6 @@ const renderTrendingMovies = async () => {
     console.log(err);
   }
 };
-
-// const renderSearchMovies = async () => {
-//   try {
-//     const {
-//       data: { results },
-//     } = await movieApi.searchMovie('bond');
-
-//     console.log(results);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 const renderMovie = async () => {
   try {
@@ -48,5 +37,3 @@ const renderMovie = async () => {
 movieApi.storeGenres();
 
 renderTrendingMovies();
-// renderSearchMovies();
-// renderMovie();
