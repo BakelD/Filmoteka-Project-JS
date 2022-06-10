@@ -1,0 +1,21 @@
+{{#each this}}
+<li class="gallery__item" id={{id}}>
+        <img
+          class="gallery__icon"
+          src="{{poster_path}}"
+          alt="{{title}}"
+          width="280"
+          height="394"
+          loading="lazy"
+        />
+        <div class="item__description">
+          <p class="item__title">{{title}}</p>
+          <p class="item__info">
+            <span class="item__info--genres">{{genre_ids}} </span>
+             {{release_date}}
+          </p>
+        </div>
+      </li>
+ {{/each}}
+
+
