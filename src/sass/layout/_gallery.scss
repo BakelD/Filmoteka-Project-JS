@@ -1,9 +1,11 @@
 .gallery {
   background-color: $backgroundBody;
   padding: 20px 5px 40px 5px;
+
   @include mq(tablet) {
     padding: 60px 17px 60px 17px;
   }
+
   @include mq(desktop) {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -22,6 +24,7 @@
     flex-wrap: wrap;
     gap: 32px;
   }
+
   @include mq(desktop) {
     gap: 32px 10px;
   }
@@ -34,12 +37,15 @@
   background-color: $underlineColor;
   display: inline-block;
 }
+
 .gallery__item:not(:last-child) {
   margin-bottom: 20px;
+
   @include mq(tablet) {
     margin-bottom: 0;
   }
 }
+
 .gallery__item {
   width: 280px;
 
