@@ -1,5 +1,5 @@
 .gallery {
-  background-color: $backgroundBody;
+  background-color: $whiteColor;
   padding: 20px 5px 40px 5px;
 
   @include mq(tablet) {
@@ -29,8 +29,14 @@
     gap: 32px 10px;
   }
 }
+.item__info--genres {
+  position: relative;
+}
 
-.item__info--genres::after {
+.item__info--genres::before {
+  position: absolute;
+  top: 2px;
+  left: -2px;
   content: '';
   width: 1px;
   height: 10px;

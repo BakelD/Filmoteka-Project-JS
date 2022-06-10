@@ -1,54 +1,29 @@
-.footer__container {
+.footer .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 20px;
-  max-width: 480px;
-}
-
-@media screen and (min-width: 1024px) {
-  .footer__container {
-    max-width: 1200px;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .footer__container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-  .footer {
-    padding: 60px 0;
-  }
 }
 
 .footer {
-  font-family: 'Roboto';
+  padding: 30px 0;
   background-color: $bgFooterColor;
-  font-size: 14px;
   font-weight: 400;
   line-height: 1.75;
   color: $footerTextColor;
 }
-.footer.section {
-  padding: 30px 0;
+
+.footer__heart-svg {
+  fill: $underlineColor;
 }
 
-.footer__container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.footer__heart-svg{
-  fill:#FF6B08;
-}
-
-.footer__link {
+.footer-btn {
   text-decoration: underline;
+  border: none;
+  background-color: transparent;
+  outline: transparent;
 }
-.footer__link:visited {
-  color: currentColor;
+.footer__copyright {
+  display: flex;
+  align-items: center;
 }
