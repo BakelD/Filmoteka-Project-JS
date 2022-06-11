@@ -1,5 +1,6 @@
 import { MovieApi } from './movieApi';
 import userLibraryMArkUp from './templates/userLibraryMArkUp.hbs';
+import './buttonsLibrary';
 
 import './watchedQueuePgs';
 

@@ -39,7 +39,7 @@ async function onOpenModal(e) {
     });
 
   try {
-    
+
     const data = movieApi.getMovieFromStorageById(id);
     Loading.remove();
 

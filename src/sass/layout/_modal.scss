@@ -14,7 +14,6 @@
 
   opacity: 1;
   overflow-y: scroll;
-
 }
 
 .backdrop.is-hidden {
@@ -29,7 +28,6 @@
 
   margin-left: auto;
   margin-right: auto;
-
 
   @include mq(mobile-only) {
     width: 280px;
@@ -102,7 +100,6 @@
 }
 
 .modal__poster {
-
   width: 100%;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -114,12 +111,10 @@
   }
 
   @include mq(desktop) {
-
     margin-bottom: 0;
     margin-right: 16px;
     width: 375px;
     height: 478px;
-
   }
 }
 
@@ -149,7 +144,6 @@
   }
 }
 
-
 .modal__subtitle--table {
   color: $modalTitleTextColor;
   padding-top: 4px;
@@ -166,7 +160,6 @@
   @include mq(desktop) {
     padding-right: 83px;
   }
-
 }
 
 .table--splash {
@@ -260,7 +253,6 @@
   border-radius: 5px;
   transition: 0.5s;
 
-
   text-transform: uppercase;
   @include fonts($fs: normal, $fw: 500, $fsz: 12px, $lh: 1.33);
 
@@ -284,17 +276,14 @@
   background-color: $btnColor;
   color: $whiteColor;
 
-
   padding: 6px 27px;
 
   border: transparent;
-
 
   @include mq(tablet-only) {
     padding: 14px 10px;
     margin-right: 15px;
   }
-
 
   @include mq(desktop) {
     margin-right: 15px;
@@ -302,7 +291,6 @@
 
   &:hover,
   &:focus {
-
     transform: translate(0, -3px);
     box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
   }
