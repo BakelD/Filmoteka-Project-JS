@@ -4,8 +4,8 @@ import './findMovies.js';
 import './modal';
 import './paginationTreading';
 
-localStorage.setItem('toQueue', JSON.stringify([]));
-localStorage.setItem('toWatched', JSON.stringify([]));
+// localStorage.setItem('toQueue', JSON.stringify([]));
+// localStorage.setItem('toWatched', JSON.stringify([]));
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');

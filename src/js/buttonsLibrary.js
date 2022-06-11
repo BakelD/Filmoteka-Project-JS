@@ -1,96 +1,170 @@
 import { MovieApi } from './movieApi';
+import localStorageApi from './storage';
+import fillLibraryModalMarkup from './templates/fillLibraryModalMarkup.hbs';
+import Notiflix from 'notiflix';
+
+Notiflix.Notify.init({
+  success: {
+    background: '#ff6b01',
+    notiflixIconColor: '#32c682',
+  },
+});
 
 const movieApi = new MovieApi();
 
-const save = (key, value) => {
-  try {
-    const serializedState = JSON.stringify(value);
-    localStorage.setItem(key, serializedState);
-  } catch (error) {
-    console.error('Set state error: ', error.message);
+const refs = {
+  btnWatched: document.querySelector('[data-btn-watched]'),
+  btnQueue: document.querySelector('[data-btn-queue]'),
+
+  closeModalBtn: document.querySelector('[data-modal-close]'),
+  modal: document.querySelector('[data-modal]'),
+  gallery: document.querySelector('.gallery__list'),
+  modalContainer: document.querySelector('.modal__container'),
+  galleryItemId: document.querySelector('.gallery__item'),
+  backdrop: document.querySelector('.backdrop'),
+};
+
+const arrInLocalStrg = {
+  watched: [],
+  queue: [],
+};
+
+refs.btnQueue.addEventListener('click', onClickQueueBtn);
+refs.btnWatched.addEventListener('click', onClickWathedBtn);
+
+refs.gallery.addEventListener('click', onOpenModal);
+refs.closeModalBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', () => {
+  document.removeEventListener('keydown', closeByEsc);
+});
+refs.backdrop.addEventListener('click', onBackdropClick);
+
+let id = null;
+
+function onOpenModal(e) {
+  if (e.target.nodeName === 'UL') {
+    return;
   }
-};
 
-const load = key => {
+  document.addEventListener('keydown', closeByEsc);
+  toggleModal();
+  id = Number(e.target.closest('LI').id);
+
   try {
-    const serializedState = localStorage.getItem(key);
-    return serializedState === null ? undefined : JSON.parse(serializedState);
-  } catch (error) {
-    console.error('Get state error: ', error.message);
+    const data = movieApi.getMovieFromStorageById(id);
+
+    refs.modalContainer.innerHTML = '';
+    refs.modalContainer.insertAdjacentHTML(
+      'beforeend',
+      fillLibraryModalMarkup(data)
+    );
+
+    const links = {
+      removeBtnEl: document.querySelector('[data-remove]'),
+      moveBtnEl: document.querySelector('[data-move]'),
+    };
+
+    links.removeBtnEl.addEventListener('click', () => {
+      if (refs.btnWatched.classList.contains('activeted')) {
+        arrInLocalStrg.watched = localStorageApi.load('toWatched');
+
+        removeMovieById(arrInLocalStrg.watched, 'toWatched');
+      } else if (refs.btnQueue.classList.contains('activeted')) {
+        arrInLocalStrg.queue = localStorageApi.load('toQueue');
+
+        removeMovieById(arrInLocalStrg.queue, 'toQueue');
+      }
+    });
+
+    links.moveBtnEl.addEventListener('click', () => {
+      if (refs.btnWatched.classList.contains('activeted')) {
+        arrInLocalStrg.watched = localStorageApi.load('toWatched');
+        arrInLocalStrg.queue = localStorageApi.load('toQueue');
+
+        moveMovieByid('toWatched', arrInLocalStrg.watched, 'toQueue');
+      } else if (refs.btnQueue.classList.contains('activeted')) {
+        arrInLocalStrg.watched = localStorageApi.load('toWatched');
+        arrInLocalStrg.queue = localStorageApi.load('toQueue');
+
+        moveMovieByid('toQueue', arrInLocalStrg.queue, 'toWatched');
+      }
+    });
+  } catch (err) {
+    console.log(err);
   }
-};
-
-const remove = key => {
-  try {
-    localStorage.removeItem(key);
-  } catch (error) {
-    console.log('Remove item error: ', error.message);
-  }
-};
-
-export default {
-  save,
-  load,
-  remove,
-};
-
-const wathesBtnEl = document.querySelector('.js__btn-watched');
-const queueBtnEl = document.querySelector('.js__btn-queue');
-const galleryListEl = document.querySelector('.gallery__list');
-
-queueBtnEl.addEventListener('click', onClickQueueBtn);
-wathesBtnEl.addEventListener('click', onClickWathedBtn);
+}
 
 function onClickQueueBtn(e) {
-  wathesBtnEl.classList.remove('activeted');
-  wathesBtnEl.classList.add('deactivated');
+  refs.btnWatched.classList.remove('activeted');
+  refs.btnWatched.classList.add('deactivated');
 
-  queueBtnEl.classList.remove('deactivated');
-  queueBtnEl.classList.add('activeted');
-
-  galleryListEl.addEventListener('click', onOpenModal);
-
-  function onOpenModal() {
-    const removeBtnEl = document.querySelector('[data-modal-remove]');
-    const moveBtnEl = document.querySelector('[data-modal-move]');
-
-    removeBtnEl.addEventListener('click', onClickRemoveBtn);
-    moveBtnEl.addEventListener('click', onClickMoveBtn);
-
-    function onClickRemoveBtn() {
-      const temproraryStoreData =
-        movieApi.getMoviesFromStorageForLibrary('temproraryStore');
-    }
-
-    function onClickMoveBtn() {}
-  }
+  refs.btnQueue.classList.remove('deactivated');
+  refs.btnQueue.classList.add('activeted');
 }
 
 function onClickWathedBtn(e) {
-  wathesBtnEl.classList.remove('deactivated');
-  wathesBtnEl.classList.add('activeted');
+  refs.btnWatched.classList.remove('deactivated');
+  refs.btnWatched.classList.add('activeted');
 
-  queueBtnEl.classList.remove('activeted');
-  queueBtnEl.classList.add('deactivated');
-
-  galleryListEl.addEventListener('click', onOpenModal);
-
-  function onOpenModal() {}
+  refs.btnQueue.classList.remove('activeted');
+  refs.btnQueue.classList.add('deactivated');
 }
 
-const valueLocalStorage =
-  movieApi.getMoviesFromStorageForLibrary('temproraryStore');
+function removeMovieById(arr, key) {
+  const index = arr.findIndex(el => el.id === id);
+  if (index === -1) {
+    Notiflix.Notify.failure(
+      'Your movie has already been successfully moved or deleted!'
+    );
+    return;
+  }
 
-function removeMovieById(id) {
-  valueLocalStorage.find(el => {
-    if (el.id === id) {
-    }
-  });
+  arr.splice(index, 1);
+  localStorageApi.save(key, arr);
+  document.getElementById(id).remove();
+  Notiflix.Notify.success(
+    'Your movie has been successfully removed from the list'
+  );
+  toggleModal();
 }
-console.log(
-  valueLocalStorage.find(el => {
-    console.log(el.id);
-  })
-);
 
-function addFilm(id) {}
+function moveMovieByid(key, arr, keyForMove) {
+  const index = arr.findIndex(el => el.id === id);
+  if (index === -1) {
+    Notiflix.Notify.failure(
+      'Your movie has already been successfully moved or deleted!'
+    );
+    return;
+  }
+  const newArr = arr.splice(index, 1);
+  localStorageApi.save(key, arr);
+  const arrForMive = localStorageApi.load(keyForMove);
+  arrForMive.push(newArr[0]);
+  localStorageApi.save(keyForMove, arrForMive);
+  document.getElementById(id).remove();
+  Notiflix.Notify.success('Your movie has been successfully moved!');
+  toggleModal();
+}
+
+function closeByEsc(e) {
+  if (e.code !== 'Escape') {
+    return;
+  }
+  toggleModal();
+  document.removeEventListener('keydown', closeByEsc);
+}
+function onBackdropClick(e) {
+  if (e.target !== e.currentTarget) {
+    return;
+  }
+  toggleModal();
+  document.removeEventListener('keydown', closeByEsc);
+}
+function toggleModal() {
+  refs.modal.classList.toggle('is-hidden');
+}
+
+// console.log(localStorage.getItem('toQueue'));
+// localStorage.setItem('toQueue', JSON.stringify([]));
+// localStorage.setItem('toWatched', JSON.stringify([]));
+// console.log(localStorage.getItem('toQueue'));
