@@ -32,10 +32,10 @@ async function onOpenModal(e) {
 
   document.addEventListener('keydown', closeByEsc);
   toggleModal();
-
   const id = Number(e.target.closest('LI').id);
 
   try {
+  
     const data = movieApi.getMovieFromStorageById(id);
 
     refs.modalContainer.innerHTML = '';
