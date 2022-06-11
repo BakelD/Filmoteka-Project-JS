@@ -1,5 +1,4 @@
 
-
         <img
           class="modal__poster"
           src="{{poster_path}}"
@@ -29,7 +28,7 @@
             </tr>
             <tr>
               <th class="modal__subtitle--table">Genre</th>
-              <th class="modal__table--text">{{genres}}</th>
+              <th class="modal__table--text">{{genre_ids}}</th>
             </tr>
           </tbody>
         </table>
@@ -37,8 +36,8 @@
         <p class="modal__desc">{{overview}}
         </p>
     <div class="modal__btns">
-          <button class="btn--add active" type="button">add to Watched</button>
-          <button class="btn--add" type="button">add to queue</button>
+          <button type="button" class="btn--add active" data-add-watch>add to Watched</button>
+          <button type="button" class="btn--add" data-add-queue>add to queue</button>
         </div>
       </div>
     </div>
