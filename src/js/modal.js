@@ -1,6 +1,7 @@
 import { MovieApi } from './movieApi';
 import fillModalMarkup from './templates/fillModalMarkup.hbs';
 import localStorageApi from './storage';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 const movieApi = new MovieApi();
 
@@ -33,10 +34,14 @@ async function onOpenModal(e) {
   document.addEventListener('keydown', closeByEsc);
   toggleModal();
   const id = Number(e.target.closest('LI').id);
+  Loading.dots({
+    svgColor: '#ff6b08',
+    });
 
   try {
-  
+    
     const data = movieApi.getMovieFromStorageById(id);
+    Loading.remove();
 
     refs.modalContainer.innerHTML = '';
     refs.modalContainer.insertAdjacentHTML('beforeend', fillModalMarkup(data));

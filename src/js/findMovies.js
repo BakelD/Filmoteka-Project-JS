@@ -1,5 +1,6 @@
 import { MovieApi } from './movieApi';
 import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 const movieApi = new MovieApi();
 const formEl = document.querySelector('.header__form');
@@ -18,6 +19,9 @@ formEl.addEventListener('submit', async e => {
   }
 
   warningEl.classList.add('is-hidden');
+   Loading.dots({
+    svgColor: '#ff6b08',
+    });
 
   try {
     const {
@@ -26,6 +30,7 @@ formEl.addEventListener('submit', async e => {
 
     if (!total_pages) {
       warningEl.classList.remove('is-hidden');
+      Loading.remove();
       return;
     }
 
@@ -35,6 +40,8 @@ formEl.addEventListener('submit', async e => {
     galleryEl.innerHTML = trendingAndSearchMarkUp(preparedData);
 
     previousQueue = query;
+
+    Loading.remove();
   } catch (err) {
     console.log(err);
   }
