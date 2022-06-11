@@ -69,12 +69,25 @@ export class MovieApi {
 
   getPreparedData(arrayOfData) {
     return arrayOfData.map(
-      ({ poster_path, genre_ids, release_date, ...rest }) => {
+      ({
+        title,
+        poster_path,
+        genre_ids,
+        release_date,
+        overview,
+        popularity,
+        ...rest
+      }) => {
         return {
           ...rest,
+          popularity: popularity || 0,
+          title: title || 'Unknown',
+          overview: overview || 'No description for this movie',
           poster_path: this.#IMG_BASE_URL + poster_path,
-          release_date: release_date.slice(0, 4),
-          genre_ids: this.#getGenreNames(genre_ids).slice(0, 4).join(', '),
+          release_date: release_date.slice(0, 4) || 'in the futere',
+          genre_ids:
+            this.#getGenreNames(genre_ids).slice(0, 4).join(', ') ||
+            'No genres',
         };
       }
     );
@@ -89,7 +102,15 @@ export class MovieApi {
       const movies = JSON.parse(localStorage.getItem('temproraryStore'));
       const movie = movies.find(el => el.id === id);
 
-      console.log(movie);
+      return movie;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  getMoviesFromStorageForLibrary(key) {
+    try {
+      return JSON.parse(localStorage.getItem(key));
     } catch (err) {
       console.log(err);
     }
