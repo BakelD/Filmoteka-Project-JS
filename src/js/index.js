@@ -1,7 +1,9 @@
 import { MovieApi } from './movieApi';
 import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
 import './findMovies.js';
+import './modal';
 import './paginationTreading';
+
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');

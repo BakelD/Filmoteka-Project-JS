@@ -1,5 +1,6 @@
 import { MovieApi } from './movieApi';
 import fillModalMarkup from './templates/fillModalMarkup.hbs';
+import localStorageApi from './storage';
 
 const movieApi = new MovieApi();
 
@@ -12,11 +13,15 @@ const refs = {
   galleryItemId: document.querySelector('.gallery__item'),
   backdrop: document.querySelector('.backdrop'),
 };
+export const arrInLocalStrg = {
+  watched: [],
+  queue: [],
+};
 
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
 refs.closeModalBtn.addEventListener('click', () => {
-    document.removeEventListener('keydown', closeByEsc);
+  document.removeEventListener('keydown', closeByEsc);
 });
 refs.backdrop.addEventListener('click', onBackdropClick);
 
@@ -27,17 +32,33 @@ async function onOpenModal(e) {
 
   document.addEventListener('keydown', closeByEsc);
   toggleModal();
-
-  const id = e.target.closest('LI').id;
+  const id = Number(e.target.closest('LI').id);
 
   try {
-    const { data } = await movieApi.getMovieInfo(id);
-
-    data.genres = data.genres.map(({ name }) => name).join(', ');
-    data.poster_path = e.target.closest('IMG').src;
+  
+    const data = movieApi.getMovieFromStorageById(id);
 
     refs.modalContainer.innerHTML = '';
     refs.modalContainer.insertAdjacentHTML('beforeend', fillModalMarkup(data));
+
+    const links = {
+      btnAddWatch: refs.modal.querySelector('[data-add-watch]'),
+      btnAddQueue: refs.modal.querySelector('[data-add-queue]'),
+    };
+
+    links.btnAddWatch.addEventListener('click', e => {
+      if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.watched.push(data);
+        localStorageApi.save('toWatched', arrInLocalStrg.watched);
+      }
+    });
+
+    links.btnAddQueue.addEventListener('click', e => {
+      if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.queue.push(data);
+        localStorageApi.save('toQueue', arrInLocalStrg.queue);
+      }
+    });
   } catch (err) {
     console.log(err);
   }
@@ -47,18 +68,16 @@ function closeByEsc(e) {
   if (e.code !== 'Escape') {
     return;
   }
-    toggleModal();
-    document.removeEventListener('keydown', closeByEsc);
-    
+  toggleModal();
+  document.removeEventListener('keydown', closeByEsc);
 }
 function onBackdropClick(e) {
-    if (e.target !== e.currentTarget) {
-        return;
-    }
-    toggleModal();
-    document.removeEventListener('keydown', closeByEsc);
-};
- 
+  if (e.target !== e.currentTarget) {
+    return;
+  }
+  toggleModal();
+  document.removeEventListener('keydown', closeByEsc);
+}
 function toggleModal() {
-    refs.modal.classList.toggle('is-hidden');
+  refs.modal.classList.toggle('is-hidden');
 }
