@@ -8,27 +8,42 @@ import {
 } from './paginationUserLibrary';
 import './watchedQueuePgs';
 
-
 localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
 // toQueue
 if (localStorage.getItem('pagesInfo')) {
   setPagesInfoToLocalStorage(1, 1);
 }
 
-const movieApi = new MovieApi();
+const previousUserlibrary = document.querySelector('.preview');
+// previousUserlibrary.style.display = 'none';
+
+export const movieApi = new MovieApi();
 movieApi.storeGenres();
 // localStorage.removeItem('temproraryStore');
 
 const galleryEl = document.querySelector('.gallery__list');
 
 export const renderLibrary = (keyLS, currentPage) => {
-  if (keyLS !== JSON.parse(localStorage.getItem('keyInfo'))) {
-    currentPage = 1;
+  if (!localStorage.getItem(keyLS)) {
+    previousUserlibrary.style.display = 'block';
+    // нету ключа
+    return;
   }
+  // нету элементов в ключе
+  if (JSON.parse(localStorage.getItem(keyLS)).length === 0) {
+    previousUserlibrary.style.display = 'block';
+    return;
+  }
+  previousUserlibrary.style.display = 'none';
+  console.log(keyLS);
+  console.log(JSON.parse(localStorage.getItem('keyInfo')));
+  // if (keyLS !== JSON.parse(localStorage.getItem('keyInfo'))) {
+  //   currentPage = 1;
+  //   console.log('Зашел в магаз');
+  // }
   console.log(currentPage);
   let total_items = JSON.parse(localStorage.getItem(keyLS)).length;
   let totalPages = Math.ceil(total_items / 10);
-
 
   const moviesArr = getMoviesForUserLibrary(currentPage, total_items, keyLS);
 
