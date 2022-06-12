@@ -23,6 +23,12 @@ export const movieApi = new MovieApi();
 movieApi.storeGenres();
 // localStorage.removeItem('temproraryStore');
 
+localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
+// toQueue
+if (localStorage.getItem('pagesInfo')) {
+  setPagesInfoToLocalStorage(1, 1);
+}
+
 const galleryEl = document.querySelector('.gallery__list');
 
 export const renderLibrary = (keyLS, currentPage) => {
