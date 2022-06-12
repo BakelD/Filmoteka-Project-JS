@@ -14,7 +14,7 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 const movieApi = new MovieApi();
 const formEl = document.querySelector('.header__form');
 const warningEl = document.querySelector('.header__warn');
-const galleryEl = document.querySelector('[data="main-gallery"]');
+const galleryEl = document.querySelector('.gallery__list');
 let previousQueue = '';
 
 formEl.addEventListener('submit', async e => {
