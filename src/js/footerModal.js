@@ -6,7 +6,6 @@ const refs ={
    }
  
  refs.openModalBtn.addEventListener('click', onOpenTeamModal);
- 
  refs.footerCloseBtn.addEventListener('click', onCloseTeamModal)
  
 function onOpenTeamModal(){
