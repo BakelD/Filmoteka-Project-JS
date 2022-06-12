@@ -15,9 +15,13 @@ const refs = {
   backdrop: document.querySelector('.backdrop'),
 };
 export const arrInLocalStrg = {
-  watched: [],
-  queue: [],
+  toWatched: [],
+  toQueue: [],
 };
+const toWatchedKey = localStorageApi.load('toWatched');
+const toQueueKey = localStorageApi.load('toQueue');
+
+
 
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
@@ -52,22 +56,81 @@ async function onOpenModal(e) {
     };
 
     links.btnAddWatch.addEventListener('click', e => {
-      if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
-        arrInLocalStrg.watched.push(data);
-        localStorageApi.save('toWatched', arrInLocalStrg.watched);
+
+      if (!toWatchedKey) {
+        if (!arrInLocalStrg.toWatched.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.toWatched.push(data);
+        localStorageApi.save('toWatched', arrInLocalStrg.toWatched);
+      }
+      }
+      if (toWatchedKey.length===0) {
+        if (!arrInLocalStrg.toWatched.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.toWatched.push(data);
+        localStorageApi.save('toWatched', arrInLocalStrg.toWatched);
+      }
+      }
+      if (!toWatchedKey.map(({ id }) => id).includes(data.id)) {
+        toWatchedKey.push(data);
+        localStorageApi.save('toWatched', toWatchedKey)
       }
     });
 
     links.btnAddQueue.addEventListener('click', e => {
-      if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
-        arrInLocalStrg.queue.push(data);
-        localStorageApi.save('toQueue', arrInLocalStrg.queue);
+       if (!toQueueKey) {
+        if (!arrInLocalStrg.toQueue.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.toQueue.push(data);
+        localStorageApi.save('toQueue', arrInLocalStrg.toQueue);
       }
+       }
+      if (toQueueKey.length===0) {
+        if (!arrInLocalStrg.toQueue.map(({ id }) => id).includes(data.id)) {
+        arrInLocalStrg.toQueue.push(data);
+        localStorageApi.save('toQueue', arrInLocalStrg.toQueue);
+      }
+      }
+      if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
+        toQueueKey.push(data);
+        localStorageApi.save('toQueue', toQueueKey)
+      }
+
+
     });
   } catch (err) {
     console.log(err);
   }
 }
+
+// function checkKeyInLocalStorage(arrFromLclStrg, arrToLclStrg, obj, key) {
+//   if (!arrFromLclStrg) {
+//         console.log(arrToLclStrg.key);
+//         if (!arrToLclStrg.key.map(({ id }) => id).includes(obj.id)) {
+//         arrToLclStrg.key.push(obj);
+//         localStorageApi.save(key, arrToLclStrg.key);
+//       }
+//       }
+
+//       if (arrFromLclStrg.length===0) {
+//         if (!arrToLclStrg.key.map(({ id }) => id).includes(obj.id)) {
+//         arrToLclStrg.key.push(obj);
+//         localStorageApi.save(key, arrToLclStrg.key);
+//       }
+//       }
+//       if (!arrFromLclStrg.map(({ id }) => id).includes(obj.id)) {
+//         arrFromLclStrg.push(obj);
+//         localStorageApi.save('toWatched', arrFromLclStrg)
+//       }
+
+//  };
+
+
+
+
+
+
+
+
+
+
 
 function closeByEsc(e) {
   if (e.code !== 'Escape') {
