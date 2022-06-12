@@ -10,20 +10,20 @@ export class MovieApi {
 
   constructor() {}
 
-  getTrendingMovies() {
+  getTrendingMovies(page) {
     return axios.get(`${this.#BASE_URL}trending/movie/week`, {
       params: {
         api_key: this.#API_KEY,
-        page: 1,
+        page,
       },
     });
   }
 
-  searchMovie(query) {
+  searchMovie(query, currentPage) {
     return axios.get(`${this.#BASE_URL}search/movie`, {
       params: {
         api_key: this.#API_KEY,
-        page: 1,
+        page: currentPage,
         query,
       },
     });
