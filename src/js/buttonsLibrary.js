@@ -1,4 +1,4 @@
-import { MovieApi } from './movieApi';
+import { movieApi } from './library';
 import localStorageApi from './storage';
 import fillLibraryModalMarkup from './templates/fillLibraryModalMarkup.hbs';
 import Notiflix from 'notiflix';
@@ -10,7 +10,7 @@ Notiflix.Notify.init({
   },
 });
 
-const movieApi = new MovieApi();
+// const movieApi = new MovieApi();
 
 const refs = {
   btnWatched: document.querySelector('[data-btn-watched]'),
@@ -76,6 +76,10 @@ function onOpenModal(e) {
       }
     });
 
+    if (refs.btnQueue.classList.contains('activeted')) {
+      links.moveBtnEl.textContent = 'move to watched';
+    }
+
     links.moveBtnEl.addEventListener('click', () => {
       if (refs.btnWatched.classList.contains('activeted')) {
         arrInLocalStrg.watched = localStorageApi.load('toWatched');
@@ -138,12 +142,32 @@ function moveMovieByid(key, arr, keyForMove) {
   }
   const newArr = arr.splice(index, 1);
   localStorageApi.save(key, arr);
-  const arrForMive = localStorageApi.load(keyForMove);
-  arrForMive.push(newArr[0]);
-  localStorageApi.save(keyForMove, arrForMive);
-  document.getElementById(id).remove();
-  Notiflix.Notify.success('Your movie has been successfully moved!');
-  toggleModal();
+  const arrForMovie = localStorageApi.load(keyForMove);
+
+  if (!arrForMovie) {
+    const obj = [newArr[0]];
+    localStorage.setItem(keyForMove, JSON.stringify(obj));
+    document.getElementById(id).remove();
+    Notiflix.Notify.success('Your movie has been successfully moved!');
+    toggleModal();
+    return;
+  }
+
+  if (!arrForMovie.map(el => el.id).includes(newArr[0].id)) {
+    arrForMovie.unshift(newArr[0]);
+    localStorageApi.save(keyForMove, arrForMovie);
+    document.getElementById(id).remove();
+    Notiflix.Notify.success('Your movie has been successfully moved!');
+    toggleModal();
+  } else {
+    const indexUpdatedArr = arrForMovie.findIndex(el => el.id === id);
+    arrForMovie.splice(indexUpdatedArr, 1);
+    arrForMovie.unshift(newArr[0]);
+    localStorageApi.save(keyForMove, arrForMovie);
+    document.getElementById(id).remove();
+    Notiflix.Notify.success('Your movie has been successfully moved!');
+    toggleModal();
+  }
 }
 
 function closeByEsc(e) {
@@ -163,8 +187,3 @@ function onBackdropClick(e) {
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
 }
-
-// console.log(localStorage.getItem('toQueue'));
-// localStorage.setItem('toQueue', JSON.stringify([]));
-// localStorage.setItem('toWatched', JSON.stringify([]));
-// console.log(localStorage.getItem('toQueue'));
