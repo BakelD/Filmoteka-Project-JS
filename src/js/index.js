@@ -3,6 +3,7 @@ import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
 import './findMovies.js';
 import './modal';
 import './paginationTreading';
+import './footerModal.js';
 
 import {
   setStorageCalledFunction,
