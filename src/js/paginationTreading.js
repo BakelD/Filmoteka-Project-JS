@@ -1,81 +1,122 @@
-let totalPages = 25;
-let page = 1;
-let currentPage = 2;
+import { renderTrendingMovies } from './index';
+import { findMoviesByQuery } from './findMovies';
+export function setPagesInfoToLocalStorage(totalPages, currentPage) {
+  localStorage.setItem(
+    'pagesInfo',
+    JSON.stringify({ totalPages, currentPage })
+  );
+}
+export function getTotalPages() {
+  const obj = JSON.parse(localStorage.getItem('pagesInfo'));
+  return obj.totalPages;
+}
+export function getCurrentPage() {
+  const obj = JSON.parse(localStorage.getItem('pagesInfo'));
+  return obj.currentPage;
+}
+
 let paginationMarkup = '';
 let previousPage = null;
+const pointsMarkUp = `
+        <svg class="icon-points">
+          <use href="/sprite.f14d31f7.svg#icon-points"></use>
+        </svg>
+      `;
 const paginationEL = document.querySelector('.pagination');
 const btnRightEl = document.querySelector('.btn-right');
 const btnLeftEl = document.querySelector('.btn-left');
 const paginationWrapperEl = document.querySelector('.pagination-wrapper');
-// paginationWrapperEl.addEventListener('click', onPaginationWrapperBtnClick);
-btnRightEl.addEventListener('click', onPaginationWrapperBtnClick);
-btnLeftEl.addEventListener('click', onPaginationWrapperBtnClick);
+paginationEL.addEventListener('click', onPaginationClick);
+btnRightEl.addEventListener('click', onPaginationBtnRightClick);
+btnLeftEl.addEventListener('click', onPaginationBtnLeftClick);
 
 function lessSevenPagesRender(number, currentPage) {
   for (let i = 1; i <= number; i += 1) {
     if (currentPage === i) {
-      paginationMarkup += `<a class="current-page" href="">${i} </a>`;
+      paginationMarkup += `<a class="current-page" href="">${i}</a>`;
 
       continue;
     }
-    paginationMarkup += `<a href="">${i} </a>`;
+    paginationMarkup += `<a href="">${i}</a>`;
   }
-  console.log(paginationMarkup);
+
   paginationEL.innerHTML = paginationMarkup;
 }
 
 function startPagination(number, currentPage) {
-  for (let i = 1; i <= 7; i += 1) {
+  for (let i = 1; i <= 5; i += 1) {
     if (currentPage === i) {
-      paginationMarkup += `<a class="current-page" href="">${i} </a>`;
+      paginationMarkup += `<a class="current-page" href="">${i}</a>`;
       continue;
     }
-    paginationMarkup += `<a href="">${i} </a>`;
+    paginationMarkup += `<a href="">${i}</a>`;
   }
-  paginationMarkup += `<a href="">...${number}</a>`;
+
+  paginationMarkup += pointsMarkUp;
+  paginationMarkup += `<a class="start-end-el" href="">${number}</a>`;
   paginationEL.innerHTML = paginationMarkup;
 }
 
 function middlePagination(number, currentPage) {
-  paginationMarkup = `<a href="">1</a>...`;
+  paginationMarkup = `<a class="start-end-el" href="">1</a>`;
+  paginationMarkup += pointsMarkUp;
+
   const start = currentPage - 2;
   const finish = currentPage + 2;
   for (let i = start; i <= finish; i += 1) {
     if (currentPage === i) {
-      paginationMarkup += `<a class="current-page" href="">${i} </a>`;
+      paginationMarkup += `<a class="current-page" href="">${i}</a>`;
       continue;
     }
-    paginationMarkup += `<a href="">${i} </a>`;
+    paginationMarkup += `<a href="">${i}</a>`;
   }
-  paginationMarkup += `...<a href="">${number}</a>`;
+
+  paginationMarkup += pointsMarkUp;
+  paginationMarkup += `<a class="start-end-el" href="">${number}</a>`;
   paginationEL.innerHTML = paginationMarkup;
 }
 
 function endPagination(number, currentPage) {
-  paginationMarkup = `<a href="">1</a>...`;
-  for (let i = number - 6; i <= number; i += 1) {
+  paginationMarkup = `<a class="start-end-el" href="">1</a>`;
+  paginationMarkup += pointsMarkUp;
+  for (let i = number - 4; i <= number; i += 1) {
     if (currentPage === i) {
-      paginationMarkup += `<a class="current-page" href="">${i} </a>`;
+      paginationMarkup += `<a class="current-page" href="">${i}</a>`;
       continue;
     }
-    paginationMarkup += `<a href="">${i} </a>`;
+    paginationMarkup += `<a href="">${i}</a>`;
   }
 
   paginationEL.innerHTML = paginationMarkup;
 }
 
-function checkPagination(totalPages, currentPage) {
+function checkBtnAvailability(totalPages, currentPage) {
+  if (currentPage === 1) {
+    btnLeftEl.disabled = true;
+
+    return;
+  }
+  if (currentPage === totalPages) {
+    btnRightEl.disabled = true;
+    return;
+  }
+  btnLeftEl.disabled = false;
+  btnRightEl.disabled = false;
+}
+
+export function checkPagination(totalPages, currentPage) {
   paginationEL.innerHTML = '';
   paginationMarkup = '';
-  if (totalPages <= 7) {
+  checkBtnAvailability(totalPages, currentPage);
+  if (totalPages <= 5) {
     lessSevenPagesRender(totalPages, currentPage);
     if (totalPages === 1) {
       btnRightEl.style.display = 'none';
       btnLeftEl.style.display = 'none';
     }
-  } else if (currentPage >= totalPages - 6) {
+  } else if (currentPage >= totalPages - 4) {
     endPagination(totalPages, currentPage);
-  } else if (currentPage <= 7) {
+  } else if (currentPage <= 5) {
     startPagination(totalPages, currentPage);
   } else {
     middlePagination(totalPages, currentPage);
@@ -84,20 +125,30 @@ function checkPagination(totalPages, currentPage) {
   previousPage = document.querySelector('.current-page');
 }
 
-function onPaginationWrapperBtnClick(event) {
-  console.log(currentPage);
-  if (event.currentTarget.classList.contains('btn-right')) {
-    if (totalPages === currentPage) {
-      return;
-    }
-    currentPage += 1;
-    if (previousPage) {
-      previousPage.classList.remove('current-page');
-    }
-    checkPagination(totalPages, currentPage);
+function onPaginationBtnRightClick(event) {
+  console.log('=>');
+
+  let currentPage = getCurrentPage();
+  const totalPages = getTotalPages();
+
+  if (totalPages === currentPage) {
     return;
   }
+  currentPage += 1;
 
+  if (previousPage) {
+    previousPage.classList.remove('current-page');
+  }
+  setPagesInfoToLocalStorage(totalPages, currentPage);
+  checkAndCallFunction(currentPage);
+  checkPagination(totalPages, currentPage);
+}
+
+function onPaginationBtnLeftClick(event) {
+  console.log('<=');
+
+  let currentPage = getCurrentPage();
+  const totalPages = getTotalPages();
   if (currentPage === 1) {
     return;
   }
@@ -106,8 +157,47 @@ function onPaginationWrapperBtnClick(event) {
   if (previousPage) {
     previousPage.classList.remove('current-page');
   }
-
+  setPagesInfoToLocalStorage(totalPages, currentPage);
+  checkAndCallFunction(currentPage);
   checkPagination(totalPages, currentPage);
 }
 
-checkPagination(totalPages, currentPage);
+function onPaginationClick(event) {
+  event.preventDefault();
+  if (event.target.nodeName !== 'A') {
+    return;
+  }
+
+  const totalPages = getTotalPages();
+  const currentPage = Number(event.target.textContent.trim());
+  setPagesInfoToLocalStorage(totalPages, currentPage);
+  checkAndCallFunction(currentPage);
+}
+
+export function setStorageCalledFunction(functionName, searchingQuery) {
+  if (functionName === 'renderTrendingMovies') {
+    localStorage.setItem('calledFunction', JSON.stringify({ functionName }));
+    return;
+  }
+  if (functionName === 'findMoviesByQuery') {
+    const obj = { functionName, searchingQuery };
+    localStorage.setItem('calledFunction', JSON.stringify(obj));
+    return;
+  }
+}
+
+function getStorageCalledFunction() {
+  return JSON.parse(localStorage.getItem('calledFunction'));
+}
+
+function checkAndCallFunction(currentPage) {
+  const obj = getStorageCalledFunction();
+  if (obj.functionName === 'findMoviesByQuery') {
+    findMoviesByQuery(obj.searchingQuery, currentPage);
+    return;
+  }
+  if (obj.functionName === 'renderTrendingMovies') {
+    renderTrendingMovies(currentPage);
+    return;
+  }
+}
