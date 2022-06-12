@@ -54,6 +54,7 @@ function onOpenModal(e) {
     let data;
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
+
     if (keyInfo === 'toWatched') {
       data = movieApi.getMovieFromWatchedStorageById(id);
     } else {
