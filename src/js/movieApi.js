@@ -10,20 +10,20 @@ export class MovieApi {
 
   constructor() {}
 
-  getTrendingMovies() {
+  getTrendingMovies(page) {
     return axios.get(`${this.#BASE_URL}trending/movie/week`, {
       params: {
         api_key: this.#API_KEY,
-        page: 1,
+        page,
       },
     });
   }
 
-  searchMovie(query) {
+  searchMovie(query, currentPage) {
     return axios.get(`${this.#BASE_URL}search/movie`, {
       params: {
         api_key: this.#API_KEY,
-        page: 1,
+        page: currentPage,
         query,
       },
     });
@@ -83,8 +83,11 @@ export class MovieApi {
           popularity: popularity || 0,
           title: title || 'Unknown',
           overview: overview || 'No description for this movie',
-          poster_path: this.#IMG_BASE_URL + poster_path,
-          release_date: release_date.slice(0, 4) || 'in the futere',
+          poster_path: poster_path ? this.#IMG_BASE_URL + poster_path : '',
+          // release_date:  release_date.slice(0, 4) || 'in the futere',
+          release_date: release_date
+            ? release_date.slice(0, 4)
+            : 'in the futere',
           genre_ids:
             this.#getGenreNames(genre_ids).slice(0, 4).join(', ') ||
             'No genres',
