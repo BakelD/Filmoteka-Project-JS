@@ -4,7 +4,7 @@ import './buttonsLibrary';
 
 import './watchedQueuePgs';
 
-const movieApi = new MovieApi();
+export const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');
 
 const renderLibrary = (key, page) => {
