@@ -4,7 +4,6 @@ import './findMovies.js';
 import './modal';
 import './paginationTreading';
 
-
 import {
   setStorageCalledFunction,
   setPagesInfoToLocalStorage,
@@ -24,12 +23,8 @@ if (!localStorage.getItem('pagesInfo')) {
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');
 
-
-const movieApi = new MovieApi();
 movieApi.storeGenres();
 localStorage.removeItem('temproraryStore');
-
-const galleryEl = document.querySelector('[data="main-gallery"]');
 
 export async function renderTrendingMovies(page) {
   try {

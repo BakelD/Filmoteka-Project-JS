@@ -27,9 +27,9 @@ formEl.addEventListener('submit', async e => {
   }
 
   warningEl.classList.add('is-hidden');
-   Loading.dots({
+  Loading.dots({
     svgColor: '#ff6b08',
-    });
+  });
 
   try {
     const {
@@ -67,6 +67,7 @@ export async function findMoviesByQuery(query, currentPage) {
     setPagesInfoToLocalStorage(total_pages, currentPage);
 
     const preparedData = movieApi.getPreparedData(results);
+    console.log(preparedData);
 
     movieApi.temproraryStoreMovies(preparedData);
 
