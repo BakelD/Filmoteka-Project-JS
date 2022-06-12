@@ -3,6 +3,7 @@ import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
 import './findMovies.js';
 import './modal';
 import './paginationTreading';
+
 import {
   setStorageCalledFunction,
   setPagesInfoToLocalStorage,
@@ -15,9 +16,6 @@ import {
 if (!localStorage.getItem('pagesInfo')) {
   setPagesInfoToLocalStorage(1, 1);
 }
-
-// localStorage.setItem('toQueue', JSON.stringify([]));
-// localStorage.setItem('toWatched', JSON.stringify([]));
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('.gallery__list');

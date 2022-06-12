@@ -111,6 +111,28 @@ export class MovieApi {
     }
   }
 
+  getMovieFromWatchedStorageById(id) {
+    try {
+      const movies = JSON.parse(localStorage.getItem('toWatched'));
+      const movie = movies.find(el => el.id === id);
+
+      return movie;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  getMovieFromQueueStorageById(id) {
+    try {
+      const movies = JSON.parse(localStorage.getItem('toQueue'));
+      const movie = movies.find(el => el.id === id);
+
+      return movie;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   getMoviesFromStorageForLibrary(key) {
     try {
       return JSON.parse(localStorage.getItem(key));

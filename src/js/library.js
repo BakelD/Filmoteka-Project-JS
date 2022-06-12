@@ -8,6 +8,7 @@ import {
 } from './paginationUserLibrary';
 import './watchedQueuePgs';
 
+
 localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
 // toQueue
 if (localStorage.getItem('pagesInfo')) {
@@ -27,6 +28,7 @@ export const renderLibrary = (keyLS, currentPage) => {
   console.log(currentPage);
   let total_items = JSON.parse(localStorage.getItem(keyLS)).length;
   let totalPages = Math.ceil(total_items / 10);
+
 
   const moviesArr = getMoviesForUserLibrary(currentPage, total_items, keyLS);
 
