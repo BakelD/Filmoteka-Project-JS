@@ -1,5 +1,6 @@
 import { MovieApi } from './movieApi';
 import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
+
 import {
   setStorageCalledFunction,
   setPagesInfoToLocalStorage,
@@ -7,6 +8,9 @@ import {
   getTotalPages,
   getCurrentPage,
 } from './paginationTreading';
+
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+
 const movieApi = new MovieApi();
 const formEl = document.querySelector('.header__form');
 const warningEl = document.querySelector('.header__warn');
@@ -23,6 +27,9 @@ formEl.addEventListener('submit', async e => {
   }
 
   warningEl.classList.add('is-hidden');
+   Loading.dots({
+    svgColor: '#ff6b08',
+    });
 
   try {
     const {
@@ -31,6 +38,7 @@ formEl.addEventListener('submit', async e => {
 
     if (!total_pages) {
       warningEl.classList.remove('is-hidden');
+      Loading.remove();
       return;
     }
     setPagesInfoToLocalStorage(total_pages, page);
@@ -43,6 +51,8 @@ formEl.addEventListener('submit', async e => {
     checkPagination(getTotalPages(), getCurrentPage());
     setStorageCalledFunction('findMoviesByQuery', query);
     previousQueue = query;
+
+    Loading.remove();
   } catch (err) {
     console.log(err);
   }

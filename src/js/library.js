@@ -1,5 +1,8 @@
 import { MovieApi } from './movieApi';
 import userLibraryMArkUp from './templates/userLibraryMArkUp.hbs';
+import './buttonsLibrary';
+
+import './watchedQueuePgs';
 
 const movieApi = new MovieApi();
 const galleryEl = document.querySelector('[data="main-gallery"]');
