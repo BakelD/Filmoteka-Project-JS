@@ -3,41 +3,44 @@ import trendingAndSearchMarkUp from './templates/trendingAndSearchMarkUp.hbs';
 import './findMovies.js';
 import './modal';
 import './paginationTreading';
+import './footerModal.js';
 
-// localStorage.setItem('toQueue', JSON.stringify([]));
-// localStorage.setItem('toWatched', JSON.stringify([]));
+import {
+  setStorageCalledFunction,
+  setPagesInfoToLocalStorage,
+  checkPagination,
+  getTotalPages,
+  getCurrentPage,
+} from './paginationTreading';
+
+// *****Для первого посещения страницы
+if (!localStorage.getItem('pagesInfo')) {
+  setPagesInfoToLocalStorage(1, 1);
+}
 
 const movieApi = new MovieApi();
-const galleryEl = document.querySelector('[data="main-gallery"]');
+const galleryEl = document.querySelector('.gallery__list');
 
+movieApi.storeGenres();
 localStorage.removeItem('temproraryStore');
 
-const renderTrendingMovies = async () => {
+export async function renderTrendingMovies(page) {
   try {
     const {
       data: { results, total_pages },
-    } = await movieApi.getTrendingMovies();
-    console.log(total_pages);
-    console.log(results);
+    } = await movieApi.getTrendingMovies(page);
+
+    setPagesInfoToLocalStorage(total_pages, page);
+
     const preparedData = movieApi.getPreparedData(results);
-    console.log(preparedData);
+
     movieApi.temproraryStoreMovies(preparedData);
+
     galleryEl.innerHTML = trendingAndSearchMarkUp(preparedData);
+    checkPagination(getTotalPages(), getCurrentPage());
+    setStorageCalledFunction('renderTrendingMovies');
   } catch (err) {
     console.log(err);
   }
-};
-
-const renderMovie = async () => {
-  try {
-    const data = await movieApi.getMovieInfo(507086);
-
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-movieApi.storeGenres();
-
-renderTrendingMovies();
+}
+renderTrendingMovies(1);
