@@ -2,6 +2,7 @@ import { MovieApi } from './movieApi';
 import fillModalMarkup from './templates/fillModalMarkup.hbs';
 import localStorageApi from './storage';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import Notiflix from 'notiflix';
 
 const movieApi = new MovieApi();
 
@@ -18,6 +19,9 @@ export const arrInLocalStrg = {
   watched: [],
   queue: [],
 };
+const toWatchedKey = localStorageApi.load('toWatched');
+const toQueueKey = localStorageApi.load('toQueue');
+console.log(toWatchedKey);
 
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
@@ -52,16 +56,41 @@ async function onOpenModal(e) {
     };
 
     links.btnAddWatch.addEventListener('click', e => {
-      if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
+      if (!toWatchedKey || toWatchedKey.length === 0) {
+        if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.watched.push(data);
-        localStorageApi.save('toWatched', arrInLocalStrg.watched);
+          localStorageApi.save('toWatched', arrInLocalStrg.watched);
+          addNotifyWatchedSuccess();
+        } else {
+          addNotifyWatchedInfo();
       }
+      }
+      if (!toWatchedKey.map(({ id }) => id).includes(data.id)) {
+        toWatchedKey.push(data);
+        localStorageApi.save('toWatched', toWatchedKey);
+        addNotifyWatchedSuccess();
+      } else {
+        addNotifyWatchedInfo()
+      }
+
     });
 
     links.btnAddQueue.addEventListener('click', e => {
-      if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
+      if (!toQueueKey || toQueueKey.length === 0) {
+        if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.queue.push(data);
-        localStorageApi.save('toQueue', arrInLocalStrg.queue);
+          localStorageApi.save('toQueue', arrInLocalStrg.queue);
+          addNotifyQueueSuccess();
+        } else {
+          addNotifyQueueInfo();
+      }
+      }
+      if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
+        toQueueKey.push(data);
+        localStorageApi.save('toQueue', toQueueKey);
+        addNotifyWatchedSuccess();
+      } else {
+        addNotifyWatchedInfo()
       }
     });
   } catch (err) {
@@ -86,3 +115,26 @@ function onBackdropClick(e) {
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
 }
+
+function addNotifyWatchedSuccess() {
+  Notiflix.Notify.success(
+    'This movie has been successfully added to Watched'
+  );
+}
+function addNotifyWatchedInfo() {
+  Notiflix.Notify.failure(
+    'This movie you have in Watched'
+  )
+}
+function addNotifyQueueSuccess() {
+  Notiflix.Notify.success(
+    'This movie has been successfully added to Queue'
+  );
+}
+function addNotifyQueueInfo() {
+  Notiflix.Notify.failure(
+    'This movie you have in Queue'
+  )
+}
+
+
