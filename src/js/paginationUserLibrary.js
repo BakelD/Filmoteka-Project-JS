@@ -1,5 +1,4 @@
-import { renderTrendingMovies } from './index';
-import { findMoviesByQuery } from './findMovies';
+import { renderLibrary } from './library';
 export function setPagesInfoToLocalStorage(totalPages, currentPage) {
   localStorage.setItem(
     'pagesInfo',
@@ -14,7 +13,6 @@ export function getCurrentPage() {
   const obj = JSON.parse(localStorage.getItem('pagesInfo'));
   return obj.currentPage;
 }
-
 let paginationMarkup = '';
 let previousPage = null;
 const pointsMarkUp = `
@@ -123,7 +121,6 @@ export function checkPagination(totalPages, currentPage) {
   }
 
   previousPage = document.querySelector('.current-page');
-  console.log('CheckPagination');
 }
 
 function onPaginationBtnRightClick(event) {
@@ -175,32 +172,16 @@ function onPaginationClick(event) {
   checkAndCallFunction(currentPage);
 }
 
-export function setStorageCalledFunction(functionName, searchingQuery) {
-  if (functionName === 'renderTrendingMovies') {
-    localStorage.setItem('calledFunction', JSON.stringify({ functionName }));
-    return;
-  }
-  if (functionName === 'findMoviesByQuery') {
-    const obj = { functionName, searchingQuery };
-    localStorage.setItem('calledFunction', JSON.stringify(obj));
-    return;
-  }
+export function setStorageKeyInfo(keyInfo) {
+  localStorage.setItem('keyInfo', JSON.stringify(keyInfo));
 }
 
-function getStorageCalledFunction() {
-  return JSON.parse(localStorage.getItem('calledFunction'));
+function getStorageKeyInfo() {
+  return JSON.parse(localStorage.getItem('keyInfo'));
 }
 
 function checkAndCallFunction(currentPage) {
-  const obj = getStorageCalledFunction();
-  if (obj.functionName === 'findMoviesByQuery') {
-    findMoviesByQuery(obj.searchingQuery, currentPage);
-    window.scrollTo(0, 0);
-    return;
-  }
-  if (obj.functionName === 'renderTrendingMovies') {
-    renderTrendingMovies(currentPage);
-    window.scrollTo(0, 0);
-    return;
-  }
+  const keyInfo = getStorageKeyInfo();
+  renderLibrary(keyInfo, currentPage);
+  window.scrollTo(0, 0);
 }
