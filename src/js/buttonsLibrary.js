@@ -51,7 +51,14 @@ function onOpenModal(e) {
   id = Number(e.target.closest('LI').id);
 
   try {
-    const data = movieApi.getMovieFromStorageById(id);
+    let data;
+
+    const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
+    if (keyInfo === 'toWatched') {
+      data = movieApi.getMovieFromWatchedStorageById(id);
+    } else {
+      data = movieApi.getMovieFromQueueStorageById(id);
+    }
 
     refs.modalContainer.innerHTML = '';
     refs.modalContainer.insertAdjacentHTML(
