@@ -1,29 +1,41 @@
-const refs ={
-    footerCloseBtn: document.querySelector('.team-modal__btn'),
-    teamBackdrop: document.querySelector('#team-modal'),
-    openModalBtn: document.querySelector('.footer-close-btn'),
-    teamModal: document.querySelector('.team-modal')
-   }
+ const refs = {
+   openModalBtn: document.querySelector('.team-modal-open-btn'),
+   teamBackdrop: document.querySelector('#team-modal'),
+   footerCloseBtn: document.querySelector('.team-modal-close-btn'),
+   teamModal: document.querySelector('.team-modal'),
+  };
+
+  refs.openModalBtn.addEventListener("click", openModal);
+  refs.footerCloseBtn.addEventListener("click", toggleModal);
+
+  refs.teamBackdrop.addEventListener('click', onBackdropClick);
  
- refs.openModalBtn.addEventListener('click', onOpenTeamModal);
- refs.footerCloseBtn.addEventListener('click', onCloseTeamModal)
- 
-function onOpenTeamModal(){
-    refs.teamBackdrop.style.display='block';
-}
+  refs.footerCloseBtn.addEventListener('click', () => {
+    document.removeEventListener('keydown', closeByEsc);
+  });
 
-function onCloseTeamModal(){
-    refs.teamBackdrop.style.display='none';
-}
+  function toggleModal() {
+    refs.teamBackdrop.classList.toggle("is-hidden");
+  }
 
-window.addEventListener('click', onWindowClick);
+  function openModal(){
+    document.addEventListener('keydown', closeByEsc);
+  toggleModal(); 
+  }
 
-function onWindowClick(event){
-    if(event.target === refs.teamModal){
-        refs.teamBackdrop.style.display='none';
+  function closeByEsc(e) {
+    if (e.code !== 'Escape') {
+      return;
     }
-}
+    toggleModal();
+    document.removeEventListener('keydown', closeByEsc);
+  }
 
-
-
+  function onBackdropClick(e) {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    toggleModal();
+    document.removeEventListener('keydown', closeByEsc);
+  }
 
