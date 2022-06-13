@@ -1,5 +1,5 @@
 import { MovieApi } from './movieApi';
-import userLibraryMArkUp from './templates/userLibraryMArkUp.hbs';
+import userLibraryMArkUp from './templates/userLibraryMarkUp.hbs';
 import './buttonsLibrary.js';
 import './paginationUserLibrary.js';
 import {
