@@ -1,73 +1,72 @@
+// Footer modal style
+.team-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 112;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background-color: rgb(0, 0, 0, 0.8);
+  overflow-y: scroll;
+}
 
-  // Footer modal style
-  .team-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    overflow-y: scroll;
-    background-color: rgb(0, 0, 0, 0.25);
+.team-backdrop.is-hidden {
+  display: none;
+}
+
+.team-modal {
+  z-index: 3;
+  width: 70%;
+  height: auto;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+
+  @include mq(mobile) {
+    width: 480px;
+  }
+  @include mq(tablet) {
+    transform: translate(-50%, -50%);
+    width: 500px;
+  }
+  @include mq(desktop) {
+    transform: translate(-50%, -50%);
+    width: 550px;
+    padding-bottom: 10px;
   }
 
-  .team-backdrop.is-hidden {
-    display: none;
-  }
-
-  .team-modal {
-    z-index: 3;
-    width: 90%;
-    height: auto;
-    background-color: #fff;
+  .team-modal-close-btn {
+    position: relative;
+    top: 14px;
+    right: 0px;
+    display: block;
     margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -21%);
-   
-  
-    @include mq(mobile){
-      width: 480px;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: $whiteColor;
+    border: transparent;
+
+    &:hover,
+    &:focus {
+      background-color: $btnColor;
+      border-radius: 5px;
+      transition: 0.5s;
     }
-    @include mq(tablet){
-      transform: translate(-50%, -50%);
-      width: 734px;
-    }
-    @include mq(desktop){
-      transform: translate(-50%, -48%);
-      width: 795px;
-    }
-  
-    .team-modal-close-btn {
-      position: relative;
-      top: 14px;
-      right: 0px;
-      display: block;
-      margin-left: auto;
-      margin-bottom: 10px;
-      width: 30px;
-      height: 30px;
-      background-color: $whiteColor;
-      border: transparent;
-    
-      &:hover,
-      &:focus {
-        background-color: $btnColor;
-        border-radius: 5px;
-        transition: 0.5s;
-      }
-    }
-  
-    &__title {
-   font-family: "roboto";
-   @include fonts();
+  }
+
+  &__title {
+    font-family: 'roboto';
+    @include fonts();
     text-align: center;
-   margin-top: -30px;
+    margin-top: -30px;
     margin-bottom: 15px;
     text-transform: uppercase;
     font-size: 21px;
@@ -77,117 +76,126 @@
       margin-bottom: 15px;
       font-size: 24px;
     }
-  
+
     @include mq(desktop) {
       font-size: 36px;
-     }
     }
-  
-    &__list {
-    padding-bottom: 30px;
+  }
+
+  &__list {
+    padding-bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     list-style: none;
-  
+    justify-content: center;
+    gap: 10px;
+
     @include mq(tablet) {
       flex-direction: row;
       flex-wrap: wrap;
       gap: 15px;
     }
-  
+
     @include mq(desktop) {
-      gap: 15px 10px;
-     }
+      gap: 15px;
     }
-  
-    &__list-item {
+  }
+
+  &__list-item {
     text-align: center;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-    max-width: 236px;
-    margin: auto;
+    // max-width: 200px;
+    // margin: auto;
     text-align: center;
     font-family: arial;
-    margin-bottom: 10px;
-  
+    // margin-bottom: 10px;
+
     @include mq(tablet) {
-      width: 210px;
+      max-width: 185px;
     }
-  
+
     @include mq(desktop) {
-      width: 309px;
-     }
+      max-width: 200px;
     }
   }
-  .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s;
+  &__list-item > img {
+    border-radius: 50%;
+    padding: 5px;
   }
-  
-  @-webkit-keyframes animatezoom {
-    from {
-      -webkit-transform: scale(0);
-    }
-    to {
-      -webkit-transform: scale(1);
-    }
-  }
-  
-  @keyframes animatezoom {
-    from {
-      transform: scale(0);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
+}
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
 
-    .icon--close {
-        position: absolute;
-        top: 1px;
-        right: -1px;
-      
-        transition: 0.5s;
-      
-        stroke: black;
-      
-        .team-modal-close-btn:hover &,
-        .team-modal-close-btn:focus & {
-          stroke: $whiteColor;
-          cursor: pointer;
-        }
-      }
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
 
-  
-  .team-wrap {
-    padding: 10px 0;
-  
-    &__title {
+@keyframes animatezoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.icon--close {
+  position: absolute;
+  top: 1px;
+  right: -1px;
+
+  transition: 0.5s;
+
+  stroke: black;
+
+  .team-modal-close-btn:hover &,
+  .team-modal-close-btn:focus & {
+    stroke: $whiteColor;
+    cursor: pointer;
+  }
+}
+
+.team-wrap {
+  // padding: 10px 0;
+
+  &__title {
     padding-top: 5px;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
-  
+
     @include mq(tablet) {
-      font-size: 17px;
-     }
+      font-size: 12px;
     }
-  
-    &__text {
-    color: $footerTextColor;
-    font-size: 14px;
-    }
-  
-    &__text2 {
-    padding-bottom: 5px;
+
+    @include mq(desktop) {
+      font-size: 12px;
     }
   }
-  
-.footer__sl-svg{
-  fill:black;
+
+  &__text {
+    color: $footerTextColor;
+    font-size: 10px;
+  }
+
+  // &__text2 {
+  //   padding-bottom: 5px;
+  // }
+}
+
+.footer__sl-svg {
+  fill: black;
   &:hover,
-  &:focus{
-    fill:$btnColor
+  &:focus {
+    fill: $btnColor;
   }
 }
