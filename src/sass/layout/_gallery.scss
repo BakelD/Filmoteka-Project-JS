@@ -67,6 +67,10 @@
   cursor: pointer;
 }
 
+.item__description .item__title {
+  margin-bottom: 2px;
+}
+
 .gallery__icon {
   background-image: url(../images/altimg.jpg);
   background-repeat: no-repeat;

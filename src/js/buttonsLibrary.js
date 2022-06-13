@@ -9,15 +9,6 @@ import {
   getTotalPages,
 } from './paginationUserLibrary';
 
-Notiflix.Notify.init({
-  success: {
-    background: '#ff6b01',
-    notiflixIconColor: '#32c682',
-  },
-});
-
-// const movieApi = new MovieApi();
-
 const refs = {
   btnWatched: document.querySelector('[data-btn-watched]'),
   btnQueue: document.querySelector('[data-btn-queue]'),
@@ -162,7 +153,6 @@ function removeMovieById(arr, key) {
 }
 
 function moveMovieByid(key, arr, keyForMove) {
-  console.log('move');
   const index = arr.findIndex(el => el.id === id);
 
   if (index === -1) {
@@ -173,22 +163,20 @@ function moveMovieByid(key, arr, keyForMove) {
   }
 
   if (index === 10 && index === arr.length - 1) {
-    console.log('first page ...current page 1');
     setPagesInfoToLocalStorage(getTotalPages() - 1, 1);
     window.scrollTo(0, 0);
   } else if (index % 10 === 0 && index === arr.length - 1) {
-    console.log('last movie... current page -1');
     setPagesInfoToLocalStorage(getTotalPages() - 1, getCurrentPage() - 1);
   }
 
-  const newArr = arr.splice(index, 1);
   localStorageApi.save(key, arr);
+  const newArr = arr.splice(index, 1);
   const arrForMovie = localStorageApi.load(keyForMove);
 
   if (!arrForMovie) {
     const obj = [newArr[0]];
     localStorage.setItem(keyForMove, JSON.stringify(obj));
-    document.getElementById(id).remove();
+    // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
     renderLibrary(keyInfo, getCurrentPage());
@@ -201,7 +189,7 @@ function moveMovieByid(key, arr, keyForMove) {
   if (!arrForMovie.map(el => el.id).includes(newArr[0].id)) {
     arrForMovie.unshift(newArr[0]);
     localStorageApi.save(keyForMove, arrForMovie);
-    document.getElementById(id).remove();
+    // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
     renderLibrary(keyInfo, getCurrentPage());
@@ -213,7 +201,7 @@ function moveMovieByid(key, arr, keyForMove) {
     arrForMovie.splice(indexUpdatedArr, 1);
     arrForMovie.unshift(newArr[0]);
     localStorageApi.save(keyForMove, arrForMovie);
-    document.getElementById(id).remove();
+    // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
     renderLibrary(keyInfo, getCurrentPage());
