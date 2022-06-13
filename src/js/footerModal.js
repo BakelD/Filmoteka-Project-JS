@@ -3,6 +3,7 @@
    teamBackdrop: document.querySelector('#team-modal'),
    footerCloseBtn: document.querySelector('.team-modal-close-btn'),
    teamModal: document.querySelector('.team-modal'),
+   body: document.querySelector('body'),
   };
 
   refs.openModalBtn.addEventListener("click", openModal);
@@ -16,11 +17,13 @@
 
   function toggleModal() {
     refs.teamBackdrop.classList.toggle("is-hidden");
+    refs.body.style.overflow = 'visible';
   }
 
-  function openModal(){
+  function openModal() {
+    refs.body.style.overflow = 'hidden';
     document.addEventListener('keydown', closeByEsc);
-  toggleModal(); 
+    toggleModal(); 
   }
 
   function closeByEsc(e) {
@@ -29,6 +32,7 @@
     }
     toggleModal();
     document.removeEventListener('keydown', closeByEsc);
+    refs.body.style.overflow = 'visible';
   }
 
   function onBackdropClick(e) {
@@ -37,5 +41,6 @@
     }
     toggleModal();
     document.removeEventListener('keydown', closeByEsc);
+    refs.body.style.overflow = 'visible';
   }
 

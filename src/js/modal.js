@@ -14,7 +14,11 @@ const refs = {
   modalContainer: document.querySelector('.modal__container'),
   galleryItemId: document.querySelector('.gallery__item'),
   backdrop: document.querySelector('.backdrop'),
+  body: document.querySelector('body'),
 };
+
+
+
 export const arrInLocalStrg = {
   watched: [],
   queue: [],
@@ -42,7 +46,9 @@ async function onOpenModal(e) {
   Loading.dots({
     svgColor: '#ff6b08',
     });
+  refs.body.style.overflow = 'hidden';
 
+  
   try {
 
     const data = movieApi.getMovieFromStorageById(id);
@@ -105,16 +111,20 @@ function closeByEsc(e) {
   }
   toggleModal();
   document.removeEventListener('keydown', closeByEsc);
+  refs.body.style.overflow = 'visible';
 }
+
 function onBackdropClick(e) {
   if (e.target !== e.currentTarget) {
     return;
   }
   toggleModal();
   document.removeEventListener('keydown', closeByEsc);
+  refs.body.style.overflow = 'visible';
 }
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
+  refs.body.style.overflow = 'visible';
 }
 
 function addNotifyWatchedSuccess() {
