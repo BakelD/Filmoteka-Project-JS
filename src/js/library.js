@@ -41,6 +41,7 @@ const galleryEl = document.querySelector('.gallery__list');
 export const renderLibrary = (keyLS, currentPage) => {
   if (!localStorage.getItem(keyLS)) {
     previousUserlibrary.style.display = 'block';
+
     // нет ключа
     paginationEL.style.display = 'none';
     btnRightEl.style.display = 'none';
@@ -51,6 +52,7 @@ export const renderLibrary = (keyLS, currentPage) => {
   // нет элементов в ключе
   if (JSON.parse(localStorage.getItem(keyLS)).length === 0) {
     previousUserlibrary.style.display = 'block';
+
     paginationEL.style.display = 'none';
     btnRightEl.style.display = 'none';
     btnLeftEl.style.display = 'none';
@@ -60,6 +62,7 @@ export const renderLibrary = (keyLS, currentPage) => {
   // если одна страница
   if (JSON.parse(localStorage.getItem(keyLS)).length <= 10) {
     previousUserlibrary.style.display = 'none';
+
     paginationEL.style.display = 'flex';
     btnRightEl.style.display = 'none';
     btnLeftEl.style.display = 'none';
@@ -73,7 +76,6 @@ export const renderLibrary = (keyLS, currentPage) => {
 
     galleryEl.innerHTML = userLibraryMArkUp(moviesArr);
     checkPagination(totalPages, currentPage);
-
     return;
   }
 
@@ -82,6 +84,7 @@ export const renderLibrary = (keyLS, currentPage) => {
   btnLeftEl.style.display = 'flex';
 
   previousUserlibrary.style.display = 'none';
+
   console.log(keyLS);
   console.log(JSON.parse(localStorage.getItem('keyInfo')));
   // if (keyLS !== JSON.parse(localStorage.getItem('keyInfo'))) {

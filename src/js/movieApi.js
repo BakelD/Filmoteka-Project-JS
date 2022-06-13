@@ -83,14 +83,20 @@ export class MovieApi {
           popularity: popularity || 0,
           title: title || 'Unknown',
           overview: overview || 'No description for this movie',
-          poster_path: poster_path ? this.#IMG_BASE_URL + poster_path : '',
+          poster_path: poster_path
+            ? this.#IMG_BASE_URL + poster_path
+            : 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/vbLxDKfo8fYC8ISKKrJczNbGKLP.jpg',
+
           // release_date:  release_date.slice(0, 4) || 'in the futere',
           release_date: release_date
             ? release_date.slice(0, 4)
             : 'in the futere',
-          genre_ids:
-            this.#getGenreNames(genre_ids).slice(0, 4).join(', ') ||
-            'No genres',
+          genre_ids: this.#getGenreNames(genre_ids).join(', ') || 'No genres',
+          genre_for_gallery:
+            this.#getGenreNames(genre_ids).length > 2
+              ? this.#getGenreNames(genre_ids).slice(0, 2).join(', ') +
+                ', ... others'
+              : this.#getGenreNames(genre_ids).join('') || 'No genres',
         };
       }
     );

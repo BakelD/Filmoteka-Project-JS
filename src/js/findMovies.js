@@ -38,6 +38,9 @@ formEl.addEventListener('submit', async e => {
 
     if (!total_pages) {
       warningEl.classList.remove('is-hidden');
+      setTimeout(() => {
+        warningEl.classList.add('is-hidden');
+      }, 5000);
       Loading.remove();
       return;
     }
