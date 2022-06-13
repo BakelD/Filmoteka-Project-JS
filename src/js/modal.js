@@ -59,7 +59,7 @@ async function onOpenModal(e) {
     links.btnAddWatch.addEventListener('click', e => {
       if (!toWatchedKey || toWatchedKey.length === 0) {
         if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
-        arrInLocalStrg.watched.push(data);
+        arrInLocalStrg.watched.splice(0,0,data);
           localStorageApi.save('toWatched', arrInLocalStrg.watched);
           addNotifyWatchedSuccess();
         } else {
@@ -67,7 +67,7 @@ async function onOpenModal(e) {
       }
       }
       if (!toWatchedKey.map(({ id }) => id).includes(data.id)) {
-        toWatchedKey.push(data);
+        toWatchedKey.splice(0,0,data);
         localStorageApi.save('toWatched', toWatchedKey);
         addNotifyWatchedSuccess();
       } else {
@@ -79,7 +79,7 @@ async function onOpenModal(e) {
     links.btnAddQueue.addEventListener('click', e => {
       if (!toQueueKey || toQueueKey.length === 0) {
         if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
-        arrInLocalStrg.queue.push(data);
+        arrInLocalStrg.queue.splice(0,0,data);
           localStorageApi.save('toQueue', arrInLocalStrg.queue);
           addNotifyQueueSuccess();
         } else {
@@ -87,7 +87,7 @@ async function onOpenModal(e) {
       }
       }
       if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
-        toQueueKey.push(data);
+        toQueueKey.splice(0,0,data);
         localStorageApi.save('toQueue', toQueueKey);
         addNotifyWatchedSuccess();
       } else {
