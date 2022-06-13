@@ -63,6 +63,8 @@
   @include mq(desktop) {
     width: 309px;
   }
+
+  cursor: pointer;
 }
 
 .gallery__icon {
