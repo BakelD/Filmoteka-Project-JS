@@ -30,6 +30,7 @@ refs.closeModalBtn.addEventListener('click', () => {
 });
 refs.backdrop.addEventListener('click', onBackdropClick);
 
+
 async function onOpenModal(e) {
   if (e.target.nodeName === 'UL') {
     return;
