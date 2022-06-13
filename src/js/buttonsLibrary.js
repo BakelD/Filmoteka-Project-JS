@@ -9,15 +9,6 @@ import {
   getTotalPages,
 } from './paginationUserLibrary';
 
-Notiflix.Notify.init({
-  success: {
-    background: '#ff6b01',
-    notiflixIconColor: '#32c682',
-  },
-});
-
-// const movieApi = new MovieApi();
-
 const refs = {
   btnWatched: document.querySelector('[data-btn-watched]'),
   btnQueue: document.querySelector('[data-btn-queue]'),
