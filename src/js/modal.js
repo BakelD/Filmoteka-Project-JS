@@ -14,7 +14,11 @@ const refs = {
   modalContainer: document.querySelector('.modal__container'),
   galleryItemId: document.querySelector('.gallery__item'),
   backdrop: document.querySelector('.backdrop'),
+  body: document.querySelector('body'),
 };
+
+
+
 export const arrInLocalStrg = {
   watched: [],
   queue: [],
@@ -42,7 +46,9 @@ async function onOpenModal(e) {
   Loading.dots({
     svgColor: '#ff6b08',
     });
+  refs.body.style.overflow = 'hidden';
 
+  
   try {
 
     const data = movieApi.getMovieFromStorageById(id);
@@ -57,6 +63,8 @@ async function onOpenModal(e) {
     };
 
     links.btnAddWatch.addEventListener('click', e => {
+      links.btnAddWatch.setAttribute('disabled', true);
+      links.btnAddWatch.classList.remove('active');
       if (!toWatchedKey || toWatchedKey.length === 0) {
         if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.watched.splice(0,0,data);
@@ -77,6 +85,7 @@ async function onOpenModal(e) {
     });
 
     links.btnAddQueue.addEventListener('click', e => {
+      links.btnAddQueue.setAttribute('disabled', true);
       if (!toQueueKey || toQueueKey.length === 0) {
         if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.queue.splice(0,0,data);
@@ -105,16 +114,20 @@ function closeByEsc(e) {
   }
   toggleModal();
   document.removeEventListener('keydown', closeByEsc);
+  refs.body.style.overflow = 'visible';
 }
+
 function onBackdropClick(e) {
   if (e.target !== e.currentTarget) {
     return;
   }
   toggleModal();
   document.removeEventListener('keydown', closeByEsc);
+  refs.body.style.overflow = 'visible';
 }
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
+  refs.body.style.overflow = 'visible';
 }
 
 function addNotifyWatchedSuccess() {

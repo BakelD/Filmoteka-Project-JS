@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1;
 
   width: 100%;
   height: 100%;
@@ -25,14 +25,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -35%);
-  z-index: 3;
+
+  z-index: 2;
+  overflow: auto;
 
   background-color: white;
 
-  margin-left: auto;
-  margin-right: auto;
 
   @include mq(mobile-only) {
+    position: relative;
+    top: 50%;
+
     width: 280px;
     min-height: 940px;
 
@@ -82,6 +85,7 @@
 
   background-color: white;
   border: transparent;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -243,6 +247,7 @@
   @include flex();
   margin-top: 20px;
 
+
   @include mq(mobile-only) {
     justify-content: space-between;
   }
@@ -264,8 +269,10 @@
   border: 1px solid $txtColor;
   border-radius: 5px;
   transition: 0.5s;
+  cursor: pointer;
 
   text-transform: uppercase;
+
   @include fonts($fs: normal, $fw: 500, $fsz: 12px, $lh: 1.33);
 
   @include mq(tablet-only) {
@@ -281,6 +288,17 @@
   &:focus {
     box-shadow: 0px 8px 43px rgba(0, 0, 0.6, 0.1);
     transform: translate(0, -3px);
+  }
+}
+
+.btn--add:not(:last-child) {
+  @include mq(tablet-only) {
+
+    margin-right: 15px;
+  }
+
+  @include mq(desktop) {
+    margin-right: 15px;
   }
 }
 
