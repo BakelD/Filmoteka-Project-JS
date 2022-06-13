@@ -63,6 +63,8 @@ async function onOpenModal(e) {
     };
 
     links.btnAddWatch.addEventListener('click', e => {
+      links.btnAddWatch.setAttribute('disabled', true);
+      links.btnAddWatch.classList.remove('active');
       if (!toWatchedKey || toWatchedKey.length === 0) {
         if (!arrInLocalStrg.watched.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.watched.splice(0,0,data);
@@ -83,6 +85,7 @@ async function onOpenModal(e) {
     });
 
     links.btnAddQueue.addEventListener('click', e => {
+      links.btnAddQueue.setAttribute('disabled', true);
       if (!toQueueKey || toQueueKey.length === 0) {
         if (!arrInLocalStrg.queue.map(({ id }) => id).includes(data.id)) {
         arrInLocalStrg.queue.splice(0,0,data);
