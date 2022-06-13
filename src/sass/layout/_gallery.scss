@@ -11,9 +11,6 @@
     padding-bottom: 32px;
   }
 }
-.gallery .container {
-  text-align: center;
-}
 
 .gallery__list {
   display: flex;
@@ -109,7 +106,7 @@
   // outline: 2px solid tomato;
   margin: 60px auto;
 
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 

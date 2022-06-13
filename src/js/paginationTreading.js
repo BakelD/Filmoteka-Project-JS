@@ -30,6 +30,15 @@ paginationEL.addEventListener('click', onPaginationClick);
 btnRightEl.addEventListener('click', onPaginationBtnRightClick);
 btnLeftEl.addEventListener('click', onPaginationBtnLeftClick);
 
+const iconLeft = `<svg class="btn-icon">
+<use href="/sprite.f14d31f7.svg#icon-left"></use>
+</svg>`;
+
+const iconRight = `<svg class="btn-icon">
+<use href="/sprite.f14d31f7.svg#icon-right"></use>
+</svg>
+`;
+
 function lessSevenPagesRender(number, currentPage) {
   for (let i = 1; i <= number; i += 1) {
     if (currentPage === i) {
@@ -93,15 +102,26 @@ function endPagination(number, currentPage) {
 function checkBtnAvailability(totalPages, currentPage) {
   if (currentPage === 1) {
     btnLeftEl.disabled = true;
+    btnLeftEl.innerHTML = '';
 
+    btnRightEl.disabled = false;
+    btnRightEl.innerHTML = iconRight;
     return;
   }
   if (currentPage === totalPages) {
     btnRightEl.disabled = true;
+    btnRightEl.innerHTML = '';
+
+    btnLeftEl.disabled = false;
+    btnLeftEl.innerHTML = iconLeft;
     return;
   }
+
   btnLeftEl.disabled = false;
   btnRightEl.disabled = false;
+
+  btnRightEl.innerHTML = iconRight;
+  btnLeftEl.innerHTML = iconLeft;
 }
 
 export function checkPagination(totalPages, currentPage) {
