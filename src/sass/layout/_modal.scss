@@ -85,6 +85,7 @@
 
   background-color: white;
   border: transparent;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -267,8 +268,10 @@
   border: 1px solid $txtColor;
   border-radius: 5px;
   transition: 0.5s;
+  cursor: pointer;
 
   text-transform: uppercase;
+
   @include fonts($fs: normal, $fw: 500, $fsz: 12px, $lh: 1.33);
 
   @include mq(tablet-only) {
