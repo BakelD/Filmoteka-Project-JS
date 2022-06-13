@@ -88,9 +88,9 @@ async function onOpenModal(e) {
       if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
         toQueueKey.push(data);
         localStorageApi.save('toQueue', toQueueKey);
-        addNotifyWatchedSuccess();
+        addNotifyQueueSuccess();
       } else {
-        addNotifyWatchedInfo()
+        addNotifyQueueInfo()
       }
     });
   } catch (err) {
