@@ -36,6 +36,9 @@ function onBtnQueueClick() {
   refs.gallery.innerHTML = '';
   refs.gallery.insertAdjacentHTML('beforeend', fillQueuePage(data));
 
+  // ****** localStorage.getItem => localStorageApi.load() //
+  // ****** localStorage.setItem => localStorageApi.save() //
+
   if (JSON.parse(localStorage.getItem('keyInfo')) === 'toWatched') {
     setPagesInfoToLocalStorage(getTotalPages(), 1);
     console.log('Должна быть пейдж 1');
