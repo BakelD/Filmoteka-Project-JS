@@ -5,13 +5,19 @@
 
 .preview__container {
   min-height: 100vh;
-  background: radial-gradient(#000 15%, transparent 16%) 0 0,
-    radial-gradient(#000 15%, transparent 16%) 8px 8px,
-    radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 0 1px,
-    radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 8px 9px;
+  background-image: url(../images/preview/pngegg.png);
+  background-repeat: no-repeat;
+  background-position: bottom center;
   background-color: #282828;
-  background-size: 16px 16px;
+  background-size: contain;
   text-align: center;
+  @include mq(tablet) {
+    background-size: 70%;
+  }
+
+  @include mq(desktop) {
+    background-size: 60%;
+  }
 }
 
 .preview__text {
@@ -19,24 +25,35 @@
   padding: 20px 0;
   color: #202020;
   text-transform: uppercase;
-  letter-spacing: -4px;
-  display: block;
-  font-size: 40px;
-  line-height: 1;
-  color: #818181;
-  text-shadow: 0 13.36px 13px #ff6b08, 0 -2px 1px #ff6b08;
+  font-size: 30px;
+  line-height: 1.4;
+  color: #ff6b08;
+  text-shadow: 0 8px 13px #ff6b08, 0 -2px 1px #ff6b08;
+
+  @include mq(tablet) {
+    font-size: 37px;
+    padding: 20px 15px;
+  }
+
+  @include mq(desktop) {
+    font-size: 30px;
+    padding: 35px 15px;
+  }
 }
 
 .preview__item {
-  max-width: 75px;
-  max-height: 75px;
+  margin-top: 5px;
+  width: 75px;
+  height: 75px;
   margin: 0 auto;
 }
 
 .preview__icon {
+  border-radius: 0 10px;
   display: block;
   position: relative;
   z-index: 10;
+  box-shadow: 0 8px 13px #ff6b08, 0 -2px 1px #ff6b08;
   -webkit-transition: -webkit-transform 0.4s ease-out;
   -moz-transition: -moz-transform 0.4s ease-out;
   transition: transform 0.4s ease-out;
