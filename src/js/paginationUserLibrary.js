@@ -1,4 +1,10 @@
 import { renderLibrary } from './library';
+
+// *****для динамики SVG
+const base = document.querySelector('.library__icon use').href.baseVal;
+export const baseUrlSVG = base.slice(0, base.indexOf('#') + 1);
+// *********************
+
 export function setPagesInfoToLocalStorage(totalPages, currentPage) {
   localStorage.setItem(
     'pagesInfo',
@@ -13,11 +19,12 @@ export function getCurrentPage() {
   const obj = JSON.parse(localStorage.getItem('pagesInfo'));
   return obj.currentPage;
 }
+
 let paginationMarkup = '';
 let previousPage = null;
 const pointsMarkUp = `
         <svg class="icon-points">
-          <use href="/sprite.f14d31f7.svg#icon-points"></use>
+          <use href="${baseUrlSVG}icon-points"></use>
         </svg>
       `;
 const paginationEL = document.querySelector('.pagination');
@@ -29,11 +36,11 @@ btnRightEl.addEventListener('click', onPaginationBtnRightClick);
 btnLeftEl.addEventListener('click', onPaginationBtnLeftClick);
 
 const iconLeft = `<svg class="btn-icon">
-<use href="/sprite.f14d31f7.svg#icon-left"></use>
+<use href="${baseUrlSVG}icon-left"></use>
 </svg>`;
 
 const iconRight = `<svg class="btn-icon">
-<use href="/sprite.f14d31f7.svg#icon-right"></use>
+<use href="${baseUrlSVG}icon-right"></use>
 </svg>
 `;
 function lessSevenPagesRender(number, currentPage) {

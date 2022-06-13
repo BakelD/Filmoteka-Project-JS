@@ -1,5 +1,11 @@
 import { renderTrendingMovies } from './index';
 import { findMoviesByQuery } from './findMovies';
+
+// *****для динамики SVG
+const base = document.querySelector('.header__icon use').href.baseVal;
+export const baseUrlSVG = base.slice(0, base.indexOf('#') + 1);
+// *********************
+
 export function setPagesInfoToLocalStorage(totalPages, currentPage) {
   localStorage.setItem(
     'pagesInfo',
@@ -19,7 +25,7 @@ let paginationMarkup = '';
 let previousPage = null;
 const pointsMarkUp = `
         <svg class="icon-points">
-          <use href="/sprite.f14d31f7.svg#icon-points"></use>
+          <use href="${baseUrlSVG}icon-points"></use>
         </svg>
       `;
 const paginationEL = document.querySelector('.pagination');
@@ -30,12 +36,20 @@ paginationEL.addEventListener('click', onPaginationClick);
 btnRightEl.addEventListener('click', onPaginationBtnRightClick);
 btnLeftEl.addEventListener('click', onPaginationBtnLeftClick);
 
+// /sprite.f14d31f7.svg#icon-right
+
+// /sprite.f14d31f7.svg#icon-right
+
+// /Filmoteka-Project-JS/sprite.a7a1fd8c.svg#icon-close
+
+// ./sprite.a7a1fd8c.svg#icon-right     спрайт билда
+
 const iconLeft = `<svg class="btn-icon">
-<use href="/sprite.f14d31f7.svg#icon-left"></use>
+<use href="${baseUrlSVG}icon-left"></use>
 </svg>`;
 
 const iconRight = `<svg class="btn-icon">
-<use href="/sprite.f14d31f7.svg#icon-right"></use>
+<use href="${baseUrlSVG}icon-right"></use>
 </svg>
 `;
 
@@ -143,7 +157,6 @@ export function checkPagination(totalPages, currentPage) {
   }
 
   previousPage = document.querySelector('.current-page');
-  console.log('CheckPagination');
 }
 
 function onPaginationBtnRightClick(event) {
