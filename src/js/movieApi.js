@@ -10,8 +10,6 @@ export class MovieApi {
 
   constructor() {
     this.query = null;
-    this.page = null;
-    this.perPage = 10;
   }
 
   getTrendingMovies(page) {
@@ -156,12 +154,9 @@ export class MovieApi {
     return axios.get(`${this.#BASE_URL}movie/${this.query}`, {
       params: {
         api_key: this.#API_KEY,
-        page: 1,
+        page:1,
       },
     });
   }
-  incrementPage() {
-    this.page += 1;
-    }
 
 }

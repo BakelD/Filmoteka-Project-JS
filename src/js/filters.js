@@ -20,15 +20,14 @@ const refs = {
     btnTopRated: document.querySelector('.btn__top-rated'),
     btnUpcoming: document.querySelector('.btn__upcoming'),
     gallery: document.querySelector('.gallery__list'),
-};
-console.log(refs.gallery);
 
+    header: document.querySelector('header'),
+};
 
 refs.btnNowPlaying.addEventListener('click', onBtnFilterClick);
 refs.btnTopRated.addEventListener('click', onBtnFilterClick);
 refs.btnUpcoming.addEventListener('click', onBtnFilterClick);
 
-movieApi.page = 1;
 
 async function onBtnFilterClick(e) {
 
@@ -48,7 +47,8 @@ async function onBtnFilterClick(e) {
         } = await movieApi.getMoviesByFilter();
         
     const preparedData = movieApi.getPreparedData(results);
-    console.log(preparedData);
+        console.log(preparedData);
+        console.log(total_pages)
 
     movieApi.temproraryStoreMovies(preparedData);
 
@@ -58,7 +58,12 @@ async function onBtnFilterClick(e) {
     }
     catch (err) { console.log(err); }
     
-    movieApi.incrementPage();
 
 }
 
+
+
+// ****** clear the filters buttons at library html ******//
+if (refs.header.classList.contains('library')) {
+    refs.filterButtonsList.classList.add('visually-hidden');
+}
