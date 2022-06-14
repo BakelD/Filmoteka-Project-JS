@@ -61,7 +61,9 @@ export async function onOpenModal(e) {
       btnTrailer: refs.modal.querySelector('[data-trailer]'),
     };
 
+
     links.btnTrailer.addEventListener('click', onTrailerBtnClick);
+
 
     links.btnAddWatch.addEventListener('click', e => {
       links.btnAddWatch.setAttribute('disabled', true);

@@ -5,6 +5,7 @@ import './modal';
 import './paginationTreading';
 import './footerModal.js';
 
+
 import {
   setStorageCalledFunction,
   setPagesInfoToLocalStorage,
