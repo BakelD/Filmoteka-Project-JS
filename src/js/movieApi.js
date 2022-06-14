@@ -39,6 +39,14 @@ export class MovieApi {
     });
   }
 
+  getMovieTrailerById(id) {
+    return axios.get(`${this.#BASE_URL}movie/${id}/videos`, {
+      params: {
+        api_key: this.#API_KEY,
+      },
+    });
+  }
+
   async storeGenres() {
     try {
       const {

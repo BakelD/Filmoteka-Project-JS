@@ -89,6 +89,9 @@
 
   @include mq(desktop) {
     height: 449px;
+
+    filter: grayscale(0.4);
+    transition: 1s;
   }
 }
 
@@ -193,6 +196,7 @@
   }
 }
 
+
 .filter__buttons {
   @include flex();
 
@@ -239,3 +243,14 @@
     color: black;
   }
 }
+
+
+.gallery__item:hover .gallery__icon,
+.gallery__item:focus .gallery__icon {
+  box-shadow: 0 20px 30px 0 rgba(47, 79, 79, 0.6);
+
+  transition: 0.06s;
+  transform: scale(1.02);
+  filter: grayscale(0);
+}
+

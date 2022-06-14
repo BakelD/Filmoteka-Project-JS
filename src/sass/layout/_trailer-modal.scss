@@ -1,0 +1,44 @@
+.modal__trailer {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+
+  z-index: 4;
+  overflow: auto;
+
+  background-color: white;
+
+  @include mq(mobile-only) {
+    width: 280px;
+    min-height: 940px;
+
+    padding-top: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+
+  @include mq(tablet-only) {
+    width: 704px;
+    min-height: 552px;
+
+    padding: 40px 36px;
+
+    transform: translate(-50%, -50%);
+  }
+
+  @include mq(desktop) {
+    width: 814px;
+    min-height: 558px;
+
+    padding: 40px 16px;
+
+    transform: translate(-50%, -50%);
+  }
+}
+.trailer {
+  width: 100%;
+  margin-top: 40px;
+}
