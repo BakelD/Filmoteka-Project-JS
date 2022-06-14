@@ -25,7 +25,7 @@ function onBtnWatchedClick() {
 
   if (JSON.parse(localStorage.getItem('keyInfo')) === 'toQueue') {
     setPagesInfoToLocalStorage(getTotalPages(), 1);
-    console.log('Должна быть пейдж 1');
+   
   }
   localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
   renderLibrary('toWatched', getCurrentPage());
