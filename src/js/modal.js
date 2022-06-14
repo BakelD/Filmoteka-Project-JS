@@ -26,6 +26,7 @@ export const arrInLocalStrg = {
 const toWatchedKey = localStorageApi.load('toWatched');
 const toQueueKey = localStorageApi.load('toQueue');
 
+
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
 refs.closeModalBtn.addEventListener('click', () => {
@@ -76,8 +77,7 @@ export async function onOpenModal(e) {
         } else {
           addNotifyWatchedInfo();
         }
-      }
-      if (!toWatchedKey.map(({ id }) => id).includes(data.id)) {
+      } else if (!toWatchedKey.map(({ id }) => id).includes(data.id)) {
         toWatchedKey.splice(0, 0, data);
         localStorageApi.save('toWatched', toWatchedKey);
         addNotifyWatchedSuccess();
@@ -96,8 +96,7 @@ export async function onOpenModal(e) {
         } else {
           addNotifyQueueInfo();
         }
-      }
-      if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
+      } else if (!toQueueKey.map(({ id }) => id).includes(data.id)) {
         toQueueKey.splice(0, 0, data);
         localStorageApi.save('toQueue', toQueueKey);
         addNotifyQueueSuccess();
