@@ -8,7 +8,9 @@ export class MovieApi {
   #API_KEY = '7a08eb81e1904340c78ad5cf16c16a84';
   #IMG_BASE_URL = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
 
-  constructor() {}
+  constructor() {
+    this.query = null;
+  }
 
   getTrendingMovies(page) {
     return axios.get(`${this.#BASE_URL}trending/movie/week`, {
@@ -99,7 +101,8 @@ export class MovieApi {
           release_date: release_date
             ? release_date.slice(0, 4)
             : 'in the futere',
-          genre_ids: this.#getGenreNames(genre_ids).join(', ') || 'No genres',
+          // genre_ids: this.#getGenreNames(genre_ids).join(', ') || 'No genres',
+          genre_ids: this.#getGenreNames(genre_ids) || 'No genres',
           genre_for_gallery:
             this.#getGenreNames(genre_ids).length > 2
               ? this.#getGenreNames(genre_ids).slice(0, 2).join(', ') +
@@ -154,4 +157,14 @@ export class MovieApi {
       console.log(err);
     }
   }
+
+  getMoviesByFilter() {
+    return axios.get(`${this.#BASE_URL}movie/${this.query}`, {
+      params: {
+        api_key: this.#API_KEY,
+        page:1,
+      },
+    });
+  }
+
 }

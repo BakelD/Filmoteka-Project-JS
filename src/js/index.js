@@ -4,6 +4,7 @@ import './findMovies.js';
 import './modal';
 import './paginationTreading';
 import './footerModal.js';
+import './filters';
 
 import {
   setStorageCalledFunction,

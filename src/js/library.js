@@ -8,6 +8,7 @@ import {
 } from './paginationUserLibrary';
 import './watchedQueuePgs';
 import './footerModal.js';
+import './filters';
 
 const paginationEL = document.querySelector('.pagination');
 const btnRightEl = document.querySelector('.btn-right');

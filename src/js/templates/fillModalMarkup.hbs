@@ -1,4 +1,3 @@
-
         <img
           class="modal__poster"
           src="{{poster_path}}"
@@ -28,7 +27,8 @@
             </tr>
             <tr>
               <th class="modal__subtitle--table">Genre</th>
-              <th class="modal__table--text">{{genre_ids}}</th>
+              <th class="modal__table--text">{{#each genre_ids}}
+              {{this}}{{#unless @last}},{{/unless}}{{/each}}</th>
             </tr>
           </tbody>
         </table>

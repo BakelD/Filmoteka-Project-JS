@@ -30,6 +30,7 @@
     margin-left: 6px;
   }
 }
+
 .item__info--year {
   position: relative;
 }
@@ -81,6 +82,7 @@
   border-radius: 5px;
   object-fit: cover;
   height: 394px;
+
   @include mq(tablet) {
     height: 455px;
   }
@@ -120,10 +122,12 @@
   align-items: center;
 
   gap: 20px;
+
   @include mq(tablet) {
     gap: 10px;
   }
 }
+
 .pagination {
   display: flex;
   align-items: center;
@@ -141,12 +145,14 @@
   outline: transparent;
   background-color: $bgFooterColor;
   border-radius: 5px;
+
   &:focus,
   &:hover {
     color: $underlineColor;
     outline: 2px solid $underlineColor;
   }
 }
+
 .btn-icon {
   display: inline-block;
   width: 16px;
@@ -155,6 +161,7 @@
   stroke: currentColor;
   fill: transparent;
 }
+
 .current-page {
   display: flex;
   align-items: center;
@@ -173,20 +180,70 @@
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+
   @include mq(mobile-only) {
     display: none;
   }
 }
+
 .pagination a {
   padding: 10px 1px;
 }
+
 .pagination .start-end-el {
   @include mq(mobile-only) {
     display: none;
   }
 }
 
-// ???? animations gallery ?????\\
+
+.filter__buttons {
+  @include flex();
+
+  margin-bottom: 20px;
+
+
+}
+
+.btn__filter {
+
+  &:not(:last-child) {
+    margin-right: 10px;
+
+    @include mq(mobile-only) {
+      margin-right: 3px;
+    }
+
+  }
+}
+
+.btn {
+  @include fonts();
+
+  @include mq(tablet) {
+    font-size: 13px;
+  }
+
+  padding: 7px;
+  background-color: $whiteColor;
+
+  text-decoration: underline;
+  border: none;
+
+  &:focus,
+  &:hover {
+
+    background-color: black;
+    color: $bgFooterColor;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: $btnColor;
+    color: black;
+  }
+}
+
 
 .gallery__item:hover .gallery__icon,
 .gallery__item:focus .gallery__icon {
@@ -196,3 +253,4 @@
   transform: scale(1.02);
   filter: grayscale(0);
 }
+
