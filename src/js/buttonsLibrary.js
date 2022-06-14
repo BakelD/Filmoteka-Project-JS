@@ -8,6 +8,8 @@ import {
   setPagesInfoToLocalStorage,
   getTotalPages,
 } from './paginationUserLibrary';
+import './trailer.js';
+import { onTrailerBtnClick } from './trailer.js';
 
 const refs = {
   btnWatched: document.querySelector('[data-btn-watched]'),
@@ -46,7 +48,7 @@ function onOpenModal(e) {
   document.addEventListener('keydown', closeByEsc);
   toggleModal();
   id = Number(e.target.closest('LI').id);
-
+  localStorage.setItem('idForTrailer', JSON.stringify(id));
   try {
     let data;
 
@@ -67,7 +69,10 @@ function onOpenModal(e) {
     const links = {
       removeBtnEl: document.querySelector('[data-remove]'),
       moveBtnEl: document.querySelector('[data-move]'),
+      btnTrailer: document.querySelector('[data-trailer]'),
     };
+
+    links.btnTrailer.addEventListener('click', onTrailerBtnClick);
 
     links.removeBtnEl.addEventListener('click', () => {
       if (refs.btnWatched.classList.contains('activeted')) {
