@@ -11,6 +11,7 @@
   background-color: white;
 
   @include mq(mobile-only) {
+    // top: 75%;
     width: 280px;
     min-height: 940px;
 

@@ -251,4 +251,59 @@
   transition: 0.06s;
   transform: scale(1.02);
   filter: grayscale(0);
+
 }
+
+.arrowUp {
+  display: none;
+  @include mq(tablet) {
+    display: flex;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    right: 1%;
+    bottom: 16%;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    position: fixed;
+    background-size: 300%;
+    background: transparent;
+    border: 1px solid $btnColor;
+    color: $btnColor;
+    cursor: pointer;
+  }
+
+  @include mq(desktop) {
+    display: flex;
+    border-radius: 15px;
+    font-size: 30px;
+    bottom: 14%;
+    right: 4%;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    position: fixed;
+    background-size: 300%;
+    background: transparent;
+    border: 1px solid $btnColor;
+    color: $btnColor;
+    cursor: pointer;
+  }
+}
+
+.arrowUp:hover,
+.arrowUp:focus {
+  transition: 0.5s;
+  transform: scale(1.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+}
+
