@@ -154,6 +154,7 @@ function removeMovieById(arr, key) {
 }
 
 function moveMovieByid(key, arr, keyForMove) {
+  console.log(getCurrentPage());
   const index = arr.findIndex(el => el.id === id);
 
   if (index === -1) {
@@ -167,7 +168,7 @@ function moveMovieByid(key, arr, keyForMove) {
     setPagesInfoToLocalStorage(getTotalPages() - 1, 1);
     window.scrollTo(0, 0);
   } else if (index % 10 === 0 && index === arr.length - 1) {
-    setPagesInfoToLocalStorage(getTotalPages() - 1, getCurrentPage() - 1);
+    setPagesInfoToLocalStorage(getTotalPages() - 1, getCurrentPage());
   }
 
   localStorageApi.save(key, arr);
@@ -181,7 +182,6 @@ function moveMovieByid(key, arr, keyForMove) {
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
     renderLibrary(keyInfo, getCurrentPage());
-
     Notiflix.Notify.success('Your movie has been successfully moved!');
     toggleModal();
     return;
@@ -193,8 +193,9 @@ function moveMovieByid(key, arr, keyForMove) {
     // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
+    console.log(keyInfo);
+    console.log(getCurrentPage());
     renderLibrary(keyInfo, getCurrentPage());
-
     Notiflix.Notify.success('Your movie has been successfully moved!');
     toggleModal();
   } else {
@@ -205,6 +206,7 @@ function moveMovieByid(key, arr, keyForMove) {
     // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
+
     renderLibrary(keyInfo, getCurrentPage());
 
     Notiflix.Notify.success('Your movie has been successfully moved!');
