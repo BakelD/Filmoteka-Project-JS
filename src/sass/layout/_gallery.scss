@@ -215,14 +215,15 @@
 .btn {
   @include fonts();
 
+  border-radius: 5px;
+
   @include mq(tablet) {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   padding: 7px;
   background-color: $whiteColor;
 
-  text-decoration: underline;
   border: none;
 
   &:focus,
@@ -238,6 +239,11 @@
   }
 }
 
+.filter__current {
+  background-color: black;
+  color: $bgFooterColor;
+}
+
 .gallery__item:hover .gallery__icon,
 .gallery__item:focus .gallery__icon {
   box-shadow: 0 20px 30px 0 rgba(47, 79, 79, 0.6);
@@ -245,8 +251,4 @@
   transition: 0.06s;
   transform: scale(1.02);
   filter: grayscale(0);
-}
-
-.filter__current {
-  color: tomato;
 }
