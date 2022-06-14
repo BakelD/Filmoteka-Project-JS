@@ -25,7 +25,8 @@ function onBtnWatchedClick() {
 
   if (JSON.parse(localStorage.getItem('keyInfo')) === 'toQueue') {
     setPagesInfoToLocalStorage(getTotalPages(), 1);
-   
+    document.querySelector('.trailer').src = ``;
+    document.querySelector('.modal__trailer').style.display = 'none';
   }
   localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
   renderLibrary('toWatched', getCurrentPage());
@@ -38,10 +39,10 @@ function onBtnQueueClick() {
 
   // ****** localStorage.getItem => localStorageApi.load() //
   // ****** localStorage.setItem => localStorageApi.save() //
-
+  document.querySelector('.trailer').src = ``;
+  document.querySelector('.modal__trailer').style.display = 'none';
   if (JSON.parse(localStorage.getItem('keyInfo')) === 'toWatched') {
     setPagesInfoToLocalStorage(getTotalPages(), 1);
-    console.log('Должна быть пейдж 1');
   }
   localStorage.setItem('keyInfo', JSON.stringify('toQueue'));
   renderLibrary('toQueue', getCurrentPage());
