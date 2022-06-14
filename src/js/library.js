@@ -8,7 +8,6 @@ import {
 } from './paginationUserLibrary';
 import './watchedQueuePgs';
 import './footerModal.js';
-import './filters';
 
 const paginationEL = document.querySelector('.pagination');
 const btnRightEl = document.querySelector('.btn-right');
@@ -17,7 +16,7 @@ const btnLeftEl = document.querySelector('.btn-left');
 paginationEL.style.display = 'none';
 btnRightEl.style.display = 'none';
 btnLeftEl.style.display = 'none';
-
+document.querySelector('.filter__buttons').style.display = 'none';
 localStorage.setItem('keyInfo', JSON.stringify('toWatched'));
 // toQueue
 if (localStorage.getItem('pagesInfo')) {

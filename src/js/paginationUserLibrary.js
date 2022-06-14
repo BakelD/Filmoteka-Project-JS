@@ -150,8 +150,6 @@ export function checkPagination(totalPages, currentPage) {
 }
 
 function onPaginationBtnRightClick(event) {
-  console.log('=>');
-
   let currentPage = getCurrentPage();
   const totalPages = getTotalPages();
 
@@ -169,8 +167,6 @@ function onPaginationBtnRightClick(event) {
 }
 
 function onPaginationBtnLeftClick(event) {
-  console.log('<=');
-
   let currentPage = getCurrentPage();
   const totalPages = getTotalPages();
   if (currentPage === 1) {

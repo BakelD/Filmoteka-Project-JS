@@ -196,24 +196,19 @@
   }
 }
 
-
 .filter__buttons {
   @include flex();
 
   margin-bottom: 20px;
-
-
 }
 
 .btn__filter {
-
   &:not(:last-child) {
     margin-right: 10px;
 
     @include mq(mobile-only) {
       margin-right: 3px;
     }
-
   }
 }
 
@@ -232,7 +227,6 @@
 
   &:focus,
   &:hover {
-
     background-color: black;
     color: $bgFooterColor;
     text-decoration: none;
@@ -244,7 +238,6 @@
   }
 }
 
-
 .gallery__item:hover .gallery__icon,
 .gallery__item:focus .gallery__icon {
   box-shadow: 0 20px 30px 0 rgba(47, 79, 79, 0.6);
@@ -254,3 +247,6 @@
   filter: grayscale(0);
 }
 
+.filter__current {
+  color: tomato;
+}

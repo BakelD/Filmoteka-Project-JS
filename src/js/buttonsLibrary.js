@@ -125,7 +125,6 @@ function onClickWathedBtn(e) {
 }
 
 function removeMovieById(arr, key) {
-  console.log('remove');
   const index = arr.findIndex(el => el.id === id);
 
   if (index === -1) {
@@ -135,12 +134,9 @@ function removeMovieById(arr, key) {
     return;
   }
 
-  console.log(index);
   if (index === 10 && index === arr.length - 1) {
-    console.log('first page ...current page 1');
     setPagesInfoToLocalStorage(getTotalPages() - 1, 1);
   } else if (index % 10 === 0 && index === arr.length - 1) {
-    console.log('last movie... current page -1');
     setPagesInfoToLocalStorage(getTotalPages() - 1, getCurrentPage() - 1);
   }
 
