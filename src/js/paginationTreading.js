@@ -1,5 +1,5 @@
 import { renderTrendingMovies } from './index';
-import { findMoviesByQuery } from './findMovies';
+import { findMoviesByQuery, findMovieByFilter } from './findMovies';
 
 // *****для динамики SVG
 const base = document.querySelector('.header__icon use').href.baseVal;
@@ -35,14 +35,6 @@ const paginationWrapperEl = document.querySelector('.pagination-wrapper');
 paginationEL.addEventListener('click', onPaginationClick);
 btnRightEl.addEventListener('click', onPaginationBtnRightClick);
 btnLeftEl.addEventListener('click', onPaginationBtnLeftClick);
-
-// /sprite.f14d31f7.svg#icon-right
-
-// /sprite.f14d31f7.svg#icon-right
-
-// /Filmoteka-Project-JS/sprite.a7a1fd8c.svg#icon-close
-
-// ./sprite.a7a1fd8c.svg#icon-right     спрайт билда
 
 const iconLeft = `<svg class="btn-icon">
 <use href="${baseUrlSVG}icon-left"></use>
@@ -160,8 +152,6 @@ export function checkPagination(totalPages, currentPage) {
 }
 
 function onPaginationBtnRightClick(event) {
-  console.log('=>');
-
   let currentPage = getCurrentPage();
   const totalPages = getTotalPages();
 
@@ -179,8 +169,6 @@ function onPaginationBtnRightClick(event) {
 }
 
 function onPaginationBtnLeftClick(event) {
-  console.log('<=');
-
   let currentPage = getCurrentPage();
   const totalPages = getTotalPages();
   if (currentPage === 1) {
@@ -218,6 +206,18 @@ export function setStorageCalledFunction(functionName, searchingQuery) {
     localStorage.setItem('calledFunction', JSON.stringify(obj));
     return;
   }
+  if (functionName === 'now_playing') {
+    localStorage.setItem('calledFunction', JSON.stringify({ functionName }));
+    return;
+  }
+  if (functionName === 'top_rated') {
+    localStorage.setItem('calledFunction', JSON.stringify({ functionName }));
+    return;
+  }
+  if (functionName === 'upcoming') {
+    localStorage.setItem('calledFunction', JSON.stringify({ functionName }));
+    return;
+  }
 }
 
 function getStorageCalledFunction() {
@@ -233,6 +233,21 @@ function checkAndCallFunction(currentPage) {
   }
   if (obj.functionName === 'renderTrendingMovies') {
     renderTrendingMovies(currentPage);
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (obj.functionName === 'now_playing') {
+    findMovieByFilter(obj.functionName, currentPage);
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (obj.functionName === 'top_rated') {
+    findMovieByFilter(obj.functionName, currentPage);
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (obj.functionName === 'upcoming') {
+    findMovieByFilter(obj.functionName, currentPage);
     window.scrollTo(0, 0);
     return;
   }

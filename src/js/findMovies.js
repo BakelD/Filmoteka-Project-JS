@@ -11,6 +11,8 @@ import {
 
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
+import fillFiltered from './templates/fillFiltered.hbs';
+
 const movieApi = new MovieApi();
 const formEl = document.querySelector('.header__form');
 const warningEl = document.querySelector('.header__warn');
@@ -47,7 +49,7 @@ formEl.addEventListener('submit', async e => {
     setPagesInfoToLocalStorage(total_pages, page);
 
     const preparedData = movieApi.getPreparedData(results);
-    console.log(preparedData);
+
     movieApi.temproraryStoreMovies(preparedData);
 
     galleryEl.innerHTML = trendingAndSearchMarkUp(preparedData);
@@ -70,13 +72,68 @@ export async function findMoviesByQuery(query, currentPage) {
     setPagesInfoToLocalStorage(total_pages, currentPage);
 
     const preparedData = movieApi.getPreparedData(results);
-    console.log(preparedData);
 
     movieApi.temproraryStoreMovies(preparedData);
 
     galleryEl.innerHTML = trendingAndSearchMarkUp(preparedData);
     checkPagination(getTotalPages(), getCurrentPage());
     setStorageCalledFunction('findMoviesByQuery', query);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// ***************Next Function************************
+
+const refs = {
+  btnNowPlaying: document.querySelector('.btn__now-playing'),
+  btnTopRated: document.querySelector('.btn__top-rated'),
+  btnUpcoming: document.querySelector('.btn__upcoming'),
+};
+
+refs.btnNowPlaying.addEventListener('click', onBtnFilterClick);
+refs.btnTopRated.addEventListener('click', onBtnFilterClick);
+refs.btnUpcoming.addEventListener('click', onBtnFilterClick);
+
+function onBtnFilterClick(e) {
+  currentPage = 1;
+  let query = null;
+  if (document.querySelector('.filter__current')) {
+    document
+      .querySelector('.filter__current')
+      .classList.remove('filter__current');
+  }
+
+  if (e.target.innerHTML.trim() === 'Now playing') {
+    query = 'now_playing';
+    refs.btnNowPlaying.classList.add('filter__current');
+  } else if (e.target.innerHTML.trim() === 'Top Rated') {
+    query = 'top_rated';
+    refs.btnTopRated.classList.add('filter__current');
+  } else {
+    query = e.target.innerHTML.trim().toLowerCase();
+    refs.btnUpcoming.classList.add('filter__current');
+  }
+  findMovieByFilter(query, currentPage);
+}
+
+export async function findMovieByFilter(query, currentPage) {
+  Loading.dots({
+    svgColor: '#ff6b08',
+  });
+  try {
+    const {
+      data: { results, total_pages },
+    } = await movieApi.getMoviesByFilter(query, currentPage);
+    setPagesInfoToLocalStorage(total_pages, currentPage);
+    const preparedData = movieApi.getPreparedData(results);
+
+    movieApi.temproraryStoreMovies(preparedData);
+
+    galleryEl.innerHTML = fillFiltered(preparedData);
+    checkPagination(total_pages, currentPage);
+    setStorageCalledFunction(query, query);
+    Loading.remove();
   } catch (err) {
     console.log(err);
   }

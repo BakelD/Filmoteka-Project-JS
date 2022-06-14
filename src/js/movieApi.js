@@ -158,13 +158,12 @@ export class MovieApi {
     }
   }
 
-  getMoviesByFilter() {
-    return axios.get(`${this.#BASE_URL}movie/${this.query}`, {
+  getMoviesByFilter(query, currentPage) {
+    return axios.get(`${this.#BASE_URL}movie/${query}`, {
       params: {
         api_key: this.#API_KEY,
-        page:1,
+        page: currentPage,
       },
     });
   }
-
 }
