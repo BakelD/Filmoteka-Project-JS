@@ -154,7 +154,6 @@ function removeMovieById(arr, key) {
 }
 
 function moveMovieByid(key, arr, keyForMove) {
-  console.log(getCurrentPage());
   const index = arr.findIndex(el => el.id === id);
 
   if (index === -1) {
@@ -193,8 +192,7 @@ function moveMovieByid(key, arr, keyForMove) {
     // document.getElementById(id).remove();
 
     const keyInfo = JSON.parse(localStorage.getItem('keyInfo'));
-    console.log(keyInfo);
-    console.log(getCurrentPage());
+
     renderLibrary(keyInfo, getCurrentPage());
     Notiflix.Notify.success('Your movie has been successfully moved!');
     toggleModal();
