@@ -96,7 +96,7 @@ refs.btnTopRated.addEventListener('click', onBtnFilterClick);
 refs.btnUpcoming.addEventListener('click', onBtnFilterClick);
 
 function onBtnFilterClick(e) {
-  currentPage = 1;
+  const currentPage = 1;
   let query = null;
   if (document.querySelector('.filter__current')) {
     document
