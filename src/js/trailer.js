@@ -37,6 +37,7 @@ async function getTrailer(id) {
     } = await movieApi.getMovieTrailerById(id);
 
     if (!results.length) {
+      Loading.remove();
       return false;
     }
 
