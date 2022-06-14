@@ -25,7 +25,6 @@ export const arrInLocalStrg = {
 };
 const toWatchedKey = localStorageApi.load('toWatched');
 const toQueueKey = localStorageApi.load('toQueue');
-console.log(toWatchedKey);
 
 refs.gallery.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', toggleModal);
@@ -61,7 +60,7 @@ async function onOpenModal(e) {
       btnAddWatch: refs.modal.querySelector('[data-add-watch]'),
       btnAddQueue: refs.modal.querySelector('[data-add-queue]'),
     };
-
+    
     links.btnAddWatch.addEventListener('click', e => {
       links.btnAddWatch.setAttribute('disabled', true);
       links.btnAddWatch.classList.remove('active');
