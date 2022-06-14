@@ -15,14 +15,14 @@ refs.footerCloseBtn.addEventListener('click', () => {
 });
 
 function openModal() {
-  refs.body.style.overflow = 'hidden';
   document.addEventListener('keydown', closeByEsc);
   toggleModal();
+  refs.body.style.overflow = 'hidden';
 }
 
 function toggleModal() {
   refs.teamBackdrop.classList.toggle('is-hidden');
-  // refs.body.style.overflow = 'visible';
+  refs.body.style.overflow = 'visible';
 }
 
 function closeByEsc(e) {
