@@ -4,7 +4,7 @@
   display: none;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -71%);
+  transform: translate(-48.5%, -77%);
 
   z-index: 4;
   overflow: auto;
@@ -30,6 +30,7 @@
     transform: translate(-50%, -50%);
   }
 }
+
 .trailer {
   // position: relative;
   position: absolute;
@@ -40,8 +41,7 @@
     height: 512px;
   }
 
-  @include mq(desktop) {
-  }
+  @include mq(desktop) {}
 }
 
 .modal__trailer button {
