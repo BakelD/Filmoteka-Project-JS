@@ -184,8 +184,45 @@ function onPaginationBtnLeftClick(event) {
   checkPagination(totalPages, currentPage);
 }
 
+function pointsPlus() {
+  const totalPages = getTotalPages();
+  if (getCurrentPage() + 5 >= totalPages) {
+    const currentPage = totalPages;
+    setPagesInfoToLocalStorage(currentPage, currentPage);
+    checkAndCallFunction(currentPage);
+
+    return;
+  }
+  const currentPage = getCurrentPage() + 5;
+  setPagesInfoToLocalStorage(totalPages, currentPage);
+  checkAndCallFunction(currentPage);
+}
+function pointsMinus() {
+  if (getCurrentPage() - 5 <= 0) {
+    const currentPage = 1;
+    setPagesInfoToLocalStorage(getTotalPages(), currentPage);
+    checkAndCallFunction(currentPage);
+
+    return;
+  }
+
+  const totalPages = getTotalPages();
+  const currentPage = getCurrentPage() - 5;
+  setPagesInfoToLocalStorage(totalPages, currentPage);
+  checkAndCallFunction(currentPage);
+}
+
 function onPaginationClick(event) {
   event.preventDefault();
+  if (event.target.nodeName === 'svg') {
+    if (Number(event.target.previousElementSibling.textContent) === 1) {
+      pointsMinus();
+    } else {
+      pointsPlus();
+    }
+    return;
+  }
+
   if (event.target.nodeName !== 'A') {
     return;
   }
