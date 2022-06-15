@@ -137,8 +137,7 @@ export async function findMovieByFilter(query, currentPage) {
       return;
     }
     setPagesInfoToLocalStorage(total_pages, currentPage);
-    console.log(total_pages);
-    console.log(currentPage);
+
     const preparedData = movieApi.getPreparedData(results);
 
     movieApi.temproraryStoreMovies(preparedData);
