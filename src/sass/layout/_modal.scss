@@ -24,7 +24,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-48.5%, -42%);
+  transform: translate(-48.5%, -15%);
 
   z-index: 2;
   overflow: auto;
@@ -50,7 +50,7 @@
 
     padding: 40px 36px;
 
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -35%);
   }
 
   @include mq(desktop) {

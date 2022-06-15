@@ -247,8 +247,12 @@
 }
 
 .arrowUp {
-  display: none;
-  @include mq(tablet) {
+  @include mq(mobile-only) {
+    display: none;
+  }
+
+
+  @include mq(tablet-only) {
     display: flex;
     border-radius: 5px;
     width: 30px;
@@ -259,9 +263,12 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
+
     position: fixed;
+    z-index: 10;
+
     background-size: 300%;
-    background: transparent;
+    background: $btnColor;
     border: 1px solid $btnColor;
     color: $btnColor;
     cursor: pointer;
@@ -279,12 +286,17 @@
     align-items: center;
     text-decoration: none;
     position: fixed;
+    z-index: 10;
     background-size: 300%;
-    background: transparent;
+    background: $btnColor;
     border: 1px solid $btnColor;
     color: $btnColor;
     cursor: pointer;
   }
+}
+
+.btn__icon-top {
+  fill: $whiteColor;
 }
 
 .arrowUp:hover,
@@ -292,6 +304,8 @@
   transition: 0.5s;
   transform: scale(1.2);
 }
+
+
 
 html {
   scroll-behavior: smooth;
