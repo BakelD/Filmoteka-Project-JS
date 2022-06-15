@@ -118,6 +118,8 @@ function onBtnFilterClick(e) {
 }
 
 export async function findMovieByFilter(query, currentPage) {
+  document.querySelector('.header__form').reset();
+
   Loading.dots({
     svgColor: '#ff6b08',
   });
