@@ -87,7 +87,7 @@ function onOpenModal(e) {
     });
 
     if (refs.btnQueue.classList.contains('activeted')) {
-      links.moveBtnEl.textContent = 'move to watched';
+      links.moveBtnEl.textContent = 'add to watched';
     }
 
     links.moveBtnEl.addEventListener('click', () => {
