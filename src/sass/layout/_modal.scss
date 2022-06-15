@@ -24,7 +24,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -35%);
+  transform: translate(-48.5%, -42%);
 
   z-index: 2;
   overflow: auto;
@@ -41,7 +41,7 @@
     padding-top: 48px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
   }
 
   @include mq(tablet-only) {
@@ -64,6 +64,11 @@
 }
 
 .modal__container {
+
+  @include mq(tablet-only) {
+    position: relative;
+  }
+
   @include mq(tablet) {
     display: flex;
     flex-basis: content;
@@ -111,25 +116,26 @@
 
 .modal__poster {
   width: 100%;
+  height: 100%;
   border-radius: 5px;
   margin-bottom: 20px;
 
   background-image: url(../images/altimg.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: 240px 357px;
 
   @include mq(tablet-only) {
     margin-right: 68px;
     width: 264px;
-    height: 374px;
+    // height: 374px;
   }
 
   @include mq(desktop) {
     margin-bottom: 0;
     margin-right: 16px;
     width: 375px;
-    height: 478px;
+    // height: 478px;
   }
 }
 
@@ -208,7 +214,8 @@
 }
 
 .modal__desc {
-  max-height: 240px;
+  min-height: 190px;
+  max-height: 236px;
 
   padding-right: 10px;
   overflow-y: scroll;
@@ -217,9 +224,13 @@
 
   @include mq(tablet-only) {
     @include fonts($fs: normal, $fw: 500, $fsz: 12px, $lh: 1.66);
+
+    width: 264px;
+    max-height: 236px;
   }
 
   @include mq(desktop) {
+    width: 391px;
     max-height: 160px;
   }
 }
@@ -249,7 +260,7 @@
 
   @include mq(tablet-only) {
     position: absolute;
-    transform: translate(-50%, 195%);
+    transform: translate(-50%, 0%);
     flex-wrap: nowrap;
     gap: 50px;
   }
