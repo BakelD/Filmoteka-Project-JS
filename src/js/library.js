@@ -85,13 +85,6 @@ export const renderLibrary = (keyLS, currentPage) => {
 
   previousUserlibrary.style.display = 'none';
 
-  console.log(keyLS);
-  console.log(JSON.parse(localStorage.getItem('keyInfo')));
-  // if (keyLS !== JSON.parse(localStorage.getItem('keyInfo'))) {
-  //   currentPage = 1;
-  //   console.log('Зашел в магаз');
-  // }
-  console.log(currentPage);
   let total_items = JSON.parse(localStorage.getItem(keyLS)).length;
   let totalPages = Math.ceil(total_items / 10);
 
