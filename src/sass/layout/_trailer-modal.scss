@@ -1,31 +1,24 @@
 .modal__trailer {
-  position: absolute;
+  // position: absolute;
+  position: relative;
   display: none;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -35%);
+  transform: translate(-50%, -71%);
 
   z-index: 4;
   overflow: auto;
-
-  background-color: white;
+  background-color: transparent;
 
   @include mq(mobile-only) {
-    // top: 75%;
+    top: 75%;
     width: 280px;
-    min-height: 940px;
-
-    padding-top: 48px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    height: 940px;
   }
 
   @include mq(tablet-only) {
     width: 704px;
-    min-height: 552px;
-
-    padding: 40px 36px;
+    height: 552px;
 
     transform: translate(-50%, -50%);
   }
@@ -34,12 +27,27 @@
     width: 814px;
     min-height: 558px;
 
-    padding: 40px 16px;
-
     transform: translate(-50%, -50%);
   }
 }
 .trailer {
+  // position: relative;
+  position: absolute;
   width: 100%;
   margin-top: 40px;
+
+  @include mq(tablet) {
+    height: 512px;
+  }
+
+  @include mq(desktop) {
+  }
+}
+
+.modal__trailer button {
+  background-color: $btnColor;
+
+  @include mq(desktop) {
+    background-color: #fff;
+  }
 }

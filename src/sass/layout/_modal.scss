@@ -33,8 +33,8 @@
 
   @include mq(mobile-only) {
     position: relative;
-    top: 50%;
-    // top: 100%;
+    // top: 50%;
+    top: 100%;
     width: 280px;
     min-height: 940px;
 
@@ -46,7 +46,7 @@
 
   @include mq(tablet-only) {
     width: 704px;
-    min-height: 552px;
+    height: 552px;
 
     padding: 40px 36px;
 
@@ -246,12 +246,12 @@
   margin-top: 20px;
   flex-wrap: wrap;
   gap: 20px;
-  @include mq(mobile-only) {
-    // justify-content: space-between;
-  }
 
-  @include mq(tablet) {
-    // justify-content: start;
+  @include mq(tablet-only) {
+    position: absolute;
+    transform: translate(-50%, 195%);
+    flex-wrap: nowrap;
+    gap: 50px;
   }
 
   @include mq(desktop) {
