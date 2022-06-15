@@ -122,10 +122,23 @@ export async function findMovieByFilter(query, currentPage) {
     svgColor: '#ff6b08',
   });
   try {
-    const {
+    let {
       data: { results, total_pages },
     } = await movieApi.getMoviesByFilter(query, currentPage);
+    // #####Косяк сервера!!!!!!!!!!! 500 страниц нету!!!!
+    if (query === 'top_rated') {
+      total_pages -= 50;
+      setPagesInfoToLocalStorage(total_pages, currentPage);
+      const preparedData = movieApi.getPreparedData(results);
+      galleryEl.innerHTML = fillFiltered(preparedData);
+      checkPagination(total_pages, currentPage);
+      setStorageCalledFunction(query, query);
+      Loading.remove();
+      return;
+    }
     setPagesInfoToLocalStorage(total_pages, currentPage);
+    console.log(total_pages);
+    console.log(currentPage);
     const preparedData = movieApi.getPreparedData(results);
 
     movieApi.temproraryStoreMovies(preparedData);
@@ -135,6 +148,7 @@ export async function findMovieByFilter(query, currentPage) {
     setStorageCalledFunction(query, query);
     Loading.remove();
   } catch (err) {
+    Loading.remove();
     console.log(err);
   }
 }
