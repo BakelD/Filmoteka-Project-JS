@@ -199,6 +199,14 @@ a {
 
 .library__btn:not(:last-child) {
   margin-right: 20px;
+
+  @include mq(tablet) {
+    margin-right: 32px;
+  }
+
+  @include mq(desktop) {
+    margin-right: 16px;
+  }
 }
 
 .activeted {
