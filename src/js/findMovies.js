@@ -19,8 +19,17 @@ const warningEl = document.querySelector('.header__warn');
 const galleryEl = document.querySelector('.gallery__list');
 let previousQueue = '';
 
+function removeCurrentFilter() {
+  if (document.querySelector('.filter__current')) {
+    document
+      .querySelector('.filter__current')
+      .classList.remove('filter__current');
+  }
+}
+
 formEl.addEventListener('submit', async e => {
   e.preventDefault();
+  removeCurrentFilter();
   const page = 1;
   const query = e.target.elements['input-search'].value.trim();
 
