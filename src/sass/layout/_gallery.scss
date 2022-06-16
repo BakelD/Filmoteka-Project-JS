@@ -156,17 +156,6 @@
   fill: transparent;
 }
 
-.current-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $whiteColor;
-  width: 40px;
-  height: 40px;
-  background-color: $underlineColor;
-  border-radius: 5px;
-}
-
 .icon-points {
   cursor: pointer;
   display: inline-block;
@@ -188,6 +177,19 @@
 
 .pagination a {
   padding: 10px 1px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pagination .current-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $whiteColor;
+  width: 40px;
+  height: 40px;
+  background-color: $underlineColor;
+  border-radius: 5px;
 }
 
 .pagination .start-end-el {
