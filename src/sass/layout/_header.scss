@@ -70,10 +70,12 @@
   }
 }
 
-a {
+.header__nav-item a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  padding-bottom: 15px;
+  padding-top: 4px;
 }
 
 .header__nav {
@@ -100,6 +102,7 @@ a {
 }
 
 .header__link {
+  text-decoration: none;
   display: flex;
   align-items: center;
   color: #818181;
@@ -137,9 +140,6 @@ a {
   font-size: 12px;
   line-height: 1.16;
   color: $whiteColor;
-
-  padding-bottom: 15px;
-  padding-top: 4px;
 
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -207,6 +207,8 @@ a {
   align-items: center;
   fill: transparent;
   cursor: pointer;
+  padding: 10px;
+  padding-bottom: 3px;
 }
 
 .header__search-btn:hover .header__search-svg,
