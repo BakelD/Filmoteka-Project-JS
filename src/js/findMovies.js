@@ -141,16 +141,16 @@ export async function findMovieByFilter(query, currentPage) {
       total_pages -= 50;
       setPagesInfoToLocalStorage(total_pages, currentPage);
       const preparedData = movieApi.getPreparedData(results);
+      movieApi.temproraryStoreMovies(preparedData);
       galleryEl.innerHTML = fillFiltered(preparedData);
       checkPagination(total_pages, currentPage);
       setStorageCalledFunction(query, query);
       Loading.remove();
       return;
     }
+
     setPagesInfoToLocalStorage(total_pages, currentPage);
-
     const preparedData = movieApi.getPreparedData(results);
-
     movieApi.temproraryStoreMovies(preparedData);
 
     galleryEl.innerHTML = fillFiltered(preparedData);
